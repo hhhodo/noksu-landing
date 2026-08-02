@@ -53,5 +53,26 @@
     track.addEventListener('click', (e) => {
       if (moved) { e.preventDefault(); e.stopPropagation(); }
     }, true);
+
+    // ---------- center-focus: the card nearest the track's center "escapes" the row ----------
+    const cards = [...track.querySelectorAll('.flavor-card')];
+    let ticking = false;
+    const updateActive = () => {
+      ticking = false;
+      const trackCenter = track.scrollLeft + track.clientWidth / 2;
+      let closest = null;
+      let closestDist = Infinity;
+      cards.forEach((card) => {
+        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+        const dist = Math.abs(cardCenter - trackCenter);
+        if (dist < closestDist) { closestDist = dist; closest = card; }
+      });
+      cards.forEach((card) => card.classList.toggle('is-active', card === closest));
+    };
+    track.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(updateActive); }
+    }, { passive: true });
+    window.addEventListener('resize', updateActive);
+    updateActive();
   }
 })();

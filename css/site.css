@@ -25,7 +25,7 @@ body{background:var(--brand-cream);}
 /* ---------- nav ---------- */
 .nav{position:fixed;inset-inline:0;top:0;z-index:50;padding-block:var(--space-5);
   transition:background-color .25s ease, padding-block .25s ease;}
-.nav.is-scrolled{background:var(--brand-cream);border-bottom:var(--border-1);padding-block:var(--space-3);}
+.nav.is-scrolled{background:var(--brand-cream);border-bottom:var(--border-1);padding-block:var(--space-4);}
 .nav__bar{display:flex;align-items:center;justify-content:space-between;gap:var(--space-5);}
 .nav__links{display:flex;align-items:center;gap:var(--space-7);font-size:var(--fs-body-1);font-weight:var(--fw-strong);}
 .nav__links,.nav__toggle{color:var(--text-default-inverse);}
@@ -91,19 +91,31 @@ body{background:var(--brand-cream);}
    near the bottom — leaving ~28% of clear image space above them for the product to
    read as "escaping" the info panel. */
 .flavor-track{display:flex;gap:var(--grid-gutter-lg);overflow-x:auto;scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling:touch;scrollbar-width:none;padding-block:var(--space-2) var(--space-4);}
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  padding-block:var(--space-7) var(--space-5);}
 .flavor-track::-webkit-scrollbar{display:none;}
 .flavor-card{position:relative;border-radius:var(--radius-lg);overflow:hidden;
   scroll-snap-align:center;flex:0 0 calc((100% - 2 * var(--grid-gutter-lg)) / 3);min-width:280px;
   min-height:480px;display:flex;flex-direction:column;justify-content:flex-end;
-  padding:var(--space-6);color:#fff;cursor:grab;}
+  padding:var(--space-6);color:#fff;cursor:grab;
+  transition:transform .35s ease;}
 .flavor-card:active{cursor:grabbing;}
-.flavor-card__media{position:absolute;inset:0;z-index:0;}
+.flavor-card__media{position:absolute;inset:0;z-index:0;transition:inset .35s ease,border-radius .35s ease;}
 .flavor-card__top,.flavor-card__cta{position:relative;z-index:1;}
 .flavor-card__top{margin-bottom:var(--space-7);}
 .flavor-card h3{font-size:var(--fs-h3);text-transform:uppercase;margin-bottom:var(--space-4);}
 .flavor-card .badge-outline{color:#fff;}
 .flavor-card .btn{width:max-content;}
+
+/* Active (centered) card in the swipe track escapes the row: it lifts above its
+   neighbors and its image area grows past the card's own frame on every side —
+   the "product bursting out" effect the reference implies once real photography
+   replaces the placeholder. */
+.flavor-card.is-active{overflow:visible;z-index:5;transform:translateY(calc(-1 * var(--space-3)));}
+.flavor-card.is-active .flavor-card__media{
+  inset:calc(-1 * var(--space-7)) calc(-1 * var(--space-4));
+  border-radius:var(--radius-lg);
+}
 
 /* ---------- crave (full-bleed lifestyle, photo = placeholder gray) ---------- */
 .crave{position:relative;min-height:70vh;display:flex;align-items:flex-end;overflow:hidden;}
