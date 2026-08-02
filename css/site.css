@@ -30,9 +30,8 @@ body{background:var(--brand-cream);}
 .nav__links{display:flex;align-items:center;gap:var(--space-7);font-size:var(--fs-badge);font-weight:var(--fw-strong);}
 .nav__links,.nav__toggle{color:var(--text-default-inverse);}
 .nav.is-scrolled .nav__links,.nav.is-scrolled .nav__toggle{color:var(--brand-ink);}
-.nav__mark{width:44px;height:44px;border-radius:var(--radius-circle);border:1px solid currentColor;
-  display:flex;align-items:center;justify-content:center;color:var(--text-default-inverse);
-  font-size:var(--fs-badge);font-weight:var(--fw-strong);}
+.nav__mark{font-size:var(--fs-badge);font-weight:var(--fw-strong);letter-spacing:.04em;
+  text-transform:uppercase;color:var(--text-default-inverse);}
 .nav.is-scrolled .nav__mark{color:var(--brand-ink);}
 .nav__toggle{display:none;}
 
@@ -45,18 +44,18 @@ body{background:var(--brand-cream);}
 .hero__info .badge-outline{margin-bottom:var(--space-4);}
 .hero__info h2{margin-block:var(--space-3);}
 .hero__info p{margin-bottom:var(--space-5);}
-.hero__quick{position:relative;width:140px;height:260px;}
-.hero__bubble{position:absolute;width:54px;height:54px;border-radius:var(--radius-circle);
-  display:flex;align-items:center;justify-content:center;left:43px;overflow:hidden;}
+/* Hero circular pagination — reproduces the Figma construction: each bubble
+   sits at the top of a 520px circle, and that circle is rotated -90deg..0deg
+   in 15deg steps, sweeping the 7 bubbles along a quarter-arc (west → north).
+   The bubble itself is counter-rotated so its content stays upright. */
+.hero__arc{position:relative;width:520px;height:520px;}
+.hero__arc-item{position:absolute;inset:0;display:flex;justify-content:center;
+  transform:rotate(var(--a));}
+.hero__bubble{position:absolute;top:0;width:54px;height:54px;border-radius:var(--radius-circle);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  transform:rotate(calc(-1 * var(--a)));}
 .hero__bubble img{width:100%;height:100%;object-fit:cover;}
-.hero__bubble:nth-child(1){top:0;background:var(--brand-bubble-7);}
-.hero__bubble:nth-child(2){top:36px;background:var(--brand-bubble-6);}
-.hero__bubble:nth-child(3){top:72px;background:var(--brand-bubble-5);}
-.hero__bubble:nth-child(4){top:108px;background:var(--brand-bubble-4);}
-.hero__bubble:nth-child(5){top:144px;background:var(--brand-bubble-3);}
-.hero__bubble:nth-child(6){top:180px;background:var(--brand-bubble-2);}
-.hero__bubble:nth-child(7){top:206px;background:var(--brand-bubble-1);}
-.hero__cta{position:absolute;left:0;top:110px;width:140px;height:140px;border-radius:var(--radius-circle);
+.hero__cta{position:absolute;left:126px;top:126px;width:140px;height:140px;border-radius:var(--radius-circle);
   background:var(--brand-ink);color:#fff;display:flex;align-items:center;justify-content:center;
   font-size:var(--fs-body-1);font-weight:var(--fw-strong);letter-spacing:.075em;text-transform:uppercase;
   border:none;cursor:pointer;}
@@ -156,7 +155,9 @@ body{background:var(--brand-cream);}
   .hero__panel{flex-direction:column;align-items:flex-start;}
   .burn__panel{flex-direction:column;}
   .burn__badge,.burn__copy{flex:1 1 auto;}
+  .hero__arc{transform:scale(.7);transform-origin:bottom right;}
 }
 @media (max-width:768px){
   .flavor-card,.blog-card{grid-column:1/13 !important;}
+  .hero__arc{transform:scale(.5);transform-origin:bottom right;}
 }
