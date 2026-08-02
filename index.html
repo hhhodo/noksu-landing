@@ -2,11 +2,11 @@
 variant:
 typo=loud
 image=high
-color=mono
+color=accent
 
 image-radius=sharp
 card-radius=soft
-button-radius=soft
+button-radius=round
 
 border=hairline
 button-style=solid+outline
@@ -15,11 +15,11 @@ spacing=space-section
 -->
 <!--
 layout:
-Hero        → full-bleed → overlay content
-Flavor 1    → 4-4-4
-Crave       → full-bleed → 8-4 (content offset left)
+Hero        → full-bleed → overlay content (photo bg, bottom-left info panel, bottom-right bubble stack + CTA)
+Flavor 1    → 4-4-4 (measured: 650px cards × 3 in 1920 viewport)
+Crave       → full-bleed → 8-4 (content offset left, measured container 1400/1920)
 Flavor 2    → 4-4-4
-Burn Level  → full-bleed → 6-6
+Burn Level  → full-bleed → 668:556 flex (~6-6, measured directly, not rounded to a coarser split)
 Marquee     → full-bleed
 Footer      → default → 3-9
 -->
@@ -57,21 +57,26 @@ Footer      → default → 3-9
   <div class="container container--wide hero__content">
     <div class="hero__panel">
       <div class="hero__info" data-reveal>
-        <span class="badge">ALC 13.0%</span>
-        <h3>NOKSU 그린 그레이프</h3>
-        <p class="body-2">청포도 향 가득한 부드러운 크래프트 소주</p>
-        <a href="#flavor" class="btn btn--inverse">자세히 보기</a>
+        <span class="badge-outline">ALC 13.0%</span>
+        <h2>NOKSU 그린 그레이프</h2>
+        <p class="body-1">청포도 향 가득한 부드러운 크래프트 소주</p>
+        <a href="#flavor" class="btn btn--solid">자세히 보기</a>
       </div>
       <div class="hero__quick" data-reveal>
-        <span class="hero__quick-link">♪</span>
-        <span class="hero__quick-link">♡</span>
-        <button class="hero__cta">TASTE</button>
+        <span class="hero__bubble"><span class="img" style="width:100%;height:100%"></span></span>
+        <span class="hero__bubble"><span class="img" style="width:100%;height:100%"></span></span>
+        <span class="hero__bubble"><span class="img" style="width:100%;height:100%"></span></span>
+        <span class="hero__bubble"><span class="img" style="width:100%;height:100%"></span></span>
+        <span class="hero__bubble"><span class="img" style="width:100%;height:100%"></span></span>
+        <span class="hero__bubble"><span class="img" style="width:100%;height:100%"></span></span>
+        <span class="hero__bubble"><span class="img" style="width:100%;height:100%"></span></span>
+        <button class="hero__cta">SHOT</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Flavor 1 — 4-4-4 -->
+<!-- Flavor 1 — 4-4-4 (650px cards measured) -->
 <section class="section" id="flavor">
   <div class="container container--wide">
     <div class="section-head" data-reveal>
@@ -79,41 +84,41 @@ Footer      → default → 3-9
     </div>
     <div class="grid">
       <article class="flavor-card" style="grid-column:1/5" data-reveal>
-        <div class="flavor-card__media img img--4-3"></div>
-        <div class="flavor-card__body">
+        <div class="flavor-card__media img"></div>
+        <div class="flavor-card__top">
           <h3>NOKSU 24</h3>
-          <span class="badge">ALC 24.0%</span>
-          <div><a href="#" class="btn btn--outline">view more</a></div>
+          <span class="badge-outline">ALC 24.0%</span>
         </div>
+        <div class="flavor-card__cta"><a href="#" class="btn btn--white">view more</a></div>
       </article>
       <article class="flavor-card" style="grid-column:5/9" data-reveal>
-        <div class="flavor-card__media img img--4-3"></div>
-        <div class="flavor-card__body">
+        <div class="flavor-card__media img"></div>
+        <div class="flavor-card__top">
           <h3>NOKSU 일품</h3>
-          <span class="badge">ALC 25.0%</span>
-          <div><a href="#" class="btn btn--outline">view more</a></div>
+          <span class="badge-outline">ALC 25.0%</span>
         </div>
+        <div class="flavor-card__cta"><a href="#" class="btn btn--white">view more</a></div>
       </article>
       <article class="flavor-card" style="grid-column:9/13" data-reveal>
-        <div class="flavor-card__media img img--4-3"></div>
-        <div class="flavor-card__body">
+        <div class="flavor-card__media img"></div>
+        <div class="flavor-card__top">
           <h3>NOKSU 자몽</h3>
-          <span class="badge">ALC 13.0%</span>
-          <div><a href="#" class="btn btn--outline">view more</a></div>
+          <span class="badge-outline">ALC 13.0%</span>
         </div>
+        <div class="flavor-card__cta"><a href="#" class="btn btn--white">view more</a></div>
       </article>
     </div>
   </div>
 </section>
 
-<!-- Crave — full-bleed, 8-4 content offset -->
+<!-- Crave — full-bleed, 8-4 content offset (measured container 1400/1920 ≈ default 1440) -->
 <section class="crave">
   <div class="crave__media img"></div>
-  <div class="container container--narrow crave__content">
+  <div class="container crave__content">
     <div class="grid">
       <div style="grid-column:1/9" data-reveal>
         <h2>이 순간을 만끽하다</h2>
-        <a href="#flavor" class="btn btn--inverse">NOKSU 더 알아보기</a>
+        <a href="#flavor" class="btn btn--white">NOKSU 더 알아보기</a>
       </div>
     </div>
   </div>
@@ -129,7 +134,7 @@ Footer      → default → 3-9
       <article class="blog-card" style="grid-column:1/5" data-reveal>
         <div class="blog-card__media img img--4-3"></div>
         <div class="blog-card__body">
-          <span class="badge">BLOG</span>
+          <span class="badge-outline">BLOG</span>
           <h4>새로운 얼굴, 새로운 NOKSU</h4>
           <p class="body-2">이번 앰버서더 필름에 담긴 이야기를 만나보세요.</p>
         </div>
@@ -137,14 +142,14 @@ Footer      → default → 3-9
       <article class="blog-card" style="grid-column:5/9" data-reveal>
         <div class="blog-card__media img img--4-3"></div>
         <div class="blog-card__body">
-          <span class="badge">BLOG</span>
+          <span class="badge-outline">BLOG</span>
           <h4>2026년, 편의점에서 진짜 먹는 것들</h4>
           <p class="body-2">한 끼를 완성하는 국물과 함께하는 NOKSU 한 잔.</p>
         </div>
       </article>
       <article class="blog-card blog-card--accent" style="grid-column:9/13" data-reveal>
         <div class="blog-card__body">
-          <span class="badge">BLOG</span>
+          <span class="badge-outline">BLOG</span>
           <h4>NOKSU의 두꺼비, K-POP 데뷔하다</h4>
           <p class="body-2">뜨거운 여름을 알리는 한정판 캐릭터를 소개합니다.</p>
         </div>
@@ -153,24 +158,20 @@ Footer      → default → 3-9
   </div>
 </section>
 
-<!-- Burn Level — full-bleed, 6-6 -->
-<section class="section burn">
-  <div class="container container--narrow">
-    <div class="grid">
-      <div style="grid-column:1/7" data-reveal>
-        <div class="burn__badge">
-          <span class="badge">Lv 1. 인증 루키</span>
-          <div class="img img--1-1" style="width:220px"></div>
-          <div class="burn__gauge">
-            <strong>99</strong><span class="body-2">°C</span>
-          </div>
-        </div>
+<!-- Burn Level — full-bleed yellow, 668:556 flex (measured, ≈6-6) -->
+<section class="burn">
+  <div class="container burn__panel">
+    <div class="burn__badge" data-reveal>
+      <span class="badge-solid badge-solid--red">Lv 1. 인증 루키</span>
+      <div class="img img--1-1" style="width:220px"></div>
+      <div class="burn__gauge">
+        <strong>99</strong><span>°C</span>
       </div>
-      <div class="burn__copy" style="grid-column:7/13" data-reveal>
-        <h2>나의 온도를<br>확인해보세요</h2>
-        <p class="body-2">배지를 모을수록, 더 뜨거워집니다.</p>
-        <a href="#flavor" class="btn btn--inverse">내 온도 확인하기</a>
-      </div>
+    </div>
+    <div class="burn__copy" data-reveal>
+      <h2>나의 온도를<br>확인해보세요</h2>
+      <p>배지를 모을수록, 더 뜨거워집니다.</p>
+      <a href="#flavor" class="btn btn--red">내 온도 확인하기</a>
     </div>
   </div>
 </section>
