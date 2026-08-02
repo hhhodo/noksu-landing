@@ -27,10 +27,10 @@ body{background:var(--brand-cream);}
   transition:background-color .25s ease, padding-block .25s ease;}
 .nav.is-scrolled{background:var(--brand-cream);border-bottom:var(--border-1);padding-block:var(--space-3);}
 .nav__bar{display:flex;align-items:center;justify-content:space-between;gap:var(--space-5);}
-.nav__links{display:flex;align-items:center;gap:var(--space-7);font-size:var(--fs-badge);font-weight:var(--fw-strong);}
+.nav__links{display:flex;align-items:center;gap:var(--space-7);font-size:var(--fs-body-1);font-weight:var(--fw-strong);}
 .nav__links,.nav__toggle{color:var(--text-default-inverse);}
 .nav.is-scrolled .nav__links,.nav.is-scrolled .nav__toggle{color:var(--brand-ink);}
-.nav__mark{font-size:var(--fs-badge);font-weight:var(--fw-strong);letter-spacing:.04em;
+.nav__mark{font-size:var(--fs-body-1);font-weight:var(--fw-strong);letter-spacing:.04em;
   text-transform:uppercase;color:var(--text-default-inverse);}
 .nav.is-scrolled .nav__mark{color:var(--brand-ink);}
 .nav__toggle{display:none;}
@@ -61,12 +61,12 @@ body{background:var(--brand-cream);}
   border:none;cursor:pointer;}
 
 /* ---------- badges ---------- */
-.badge-outline{display:inline-flex;align-items:center;height:36px;padding-inline:13px;
+.badge-outline{display:inline-flex;align-items:center;height:40px;padding-inline:var(--space-4);
   border:1px solid currentColor;border-radius:var(--radius-sm);
-  font-size:var(--fs-badge);font-weight:var(--fw-strong);letter-spacing:.04em;text-transform:uppercase;}
-.badge-solid{display:inline-flex;align-items:center;height:45px;padding-inline:var(--space-5);
+  font-size:var(--fs-body-1);font-weight:var(--fw-strong);letter-spacing:.04em;text-transform:uppercase;}
+.badge-solid{display:inline-flex;align-items:center;height:48px;padding-inline:var(--space-5);
   border-radius:var(--radius-circle);color:#fff;
-  font-size:var(--fs-body-2);font-weight:var(--fw-strong);}
+  font-size:var(--fs-body-1);font-weight:var(--fw-strong);}
 .badge-solid--red{background:var(--brand-red);}
 
 /* ---------- buttons ---------- */
@@ -80,14 +80,27 @@ body{background:var(--brand-cream);}
 
 /* ---------- section heading ---------- */
 .section-head{text-align:center;margin-bottom:var(--space-8);}
-.section-head h2{font-size:var(--fs-display-md);letter-spacing:var(--display-tracking);}
+.section-head h2{font-size:var(--fs-display-lg);letter-spacing:var(--display-tracking);}
 
-/* ---------- flavor cards (photo tint = placeholder gray) ---------- */
+/* ---------- flavor track (swipeable, product art overflows the card top) ----------
+   Figma reference: each product image is ~483px tall inside a 382px card, shifted up
+   ~100px so the bottle visually pops out above the card's own top edge (image bottom
+   stays flush with the card bottom). We reproduce this without relying on overflow
+   past the scroll container (which CSS would force-clip once overflow-x is set) by
+   making the whole card the full 483px-tall image area, and anchoring the text/CTA
+   near the bottom — leaving ~28% of clear image space above them for the product to
+   read as "escaping" the info panel. */
+.flavor-track{display:flex;gap:var(--grid-gutter-lg);overflow-x:auto;scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;padding-block:var(--space-2) var(--space-4);}
+.flavor-track::-webkit-scrollbar{display:none;}
 .flavor-card{position:relative;border-radius:var(--radius-lg);overflow:hidden;
-  min-height:382px;display:flex;flex-direction:column;justify-content:space-between;
-  padding:var(--space-6);color:#fff;}
+  scroll-snap-align:center;flex:0 0 calc((100% - 2 * var(--grid-gutter-lg)) / 3);min-width:280px;
+  min-height:480px;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:var(--space-6);color:#fff;cursor:grab;}
+.flavor-card:active{cursor:grabbing;}
 .flavor-card__media{position:absolute;inset:0;z-index:0;}
 .flavor-card__top,.flavor-card__cta{position:relative;z-index:1;}
+.flavor-card__top{margin-bottom:var(--space-7);}
 .flavor-card h3{font-size:var(--fs-h3);text-transform:uppercase;margin-bottom:var(--space-4);}
 .flavor-card .badge-outline{color:#fff;}
 .flavor-card .btn{width:max-content;}
@@ -138,10 +151,10 @@ body{background:var(--brand-cream);}
 .footer__social{display:flex;gap:var(--space-3);margin-top:var(--space-6);}
 .footer__social a{width:44px;height:44px;border-radius:var(--radius-circle);border:var(--border-1);
   display:flex;align-items:center;justify-content:center;}
-.footer__info dt{font-size:var(--fs-badge);font-weight:var(--fw-strong);color:var(--text-subtle);margin-bottom:var(--space-2);}
+.footer__info dt{font-size:var(--fs-body-2);font-weight:var(--fw-strong);color:var(--text-subtle);margin-bottom:var(--space-2);}
 .footer__info dd{margin-bottom:var(--space-6);}
 .footer__legal{color:var(--text-subtle);border-top:var(--border-1);margin-top:var(--space-7);padding-top:var(--space-6);}
-.footer__legal p{margin-bottom:var(--space-2);font-size:var(--fs-badge);}
+.footer__legal p{margin-bottom:var(--space-2);font-size:var(--fs-body-2);}
 
 /* ---------- reveal ---------- */
 [data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
@@ -157,7 +170,11 @@ body{background:var(--brand-cream);}
   .burn__badge,.burn__copy{flex:1 1 auto;}
   .hero__arc{transform:scale(.7);transform-origin:bottom right;}
 }
+@media (max-width:1024px){
+  .flavor-card{flex-basis:calc((100% - var(--grid-gutter-md)) / 2);}
+}
 @media (max-width:768px){
-  .flavor-card,.blog-card{grid-column:1/13 !important;}
+  .blog-card{grid-column:1/13 !important;}
+  .flavor-card{flex-basis:85%;}
   .hero__arc{transform:scale(.5);transform-origin:bottom right;}
 }

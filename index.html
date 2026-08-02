@@ -16,7 +16,7 @@ spacing=space-section
 <!--
 layout:
 Hero        → full-bleed → overlay content (photo bg, bottom-left info panel, bottom-right bubble stack + CTA)
-Flavor 1    → 4-4-4 (measured: 650px cards × 3 in 1920 viewport)
+Flavor 1    → 4-4-4 (measured: 650px cards × 3 in 1920 viewport), swipeable track, 6 cards total
 Crave       → full-bleed → 8-4 (content offset left, measured container 1400/1920)
 Flavor 2    → 4-4-4
 Burn Level  → full-bleed → 668:556 flex (~6-6, measured directly, not rounded to a coarser split)
@@ -96,8 +96,8 @@ Footer      → default → 3-9
     <div class="section-head" data-reveal>
       <h2>FIND YOUR<br>FLAVOR</h2>
     </div>
-    <div class="grid">
-      <article class="flavor-card" style="grid-column:1/5" data-reveal>
+    <div class="flavor-track" id="flavorTrack">
+      <article class="flavor-card" data-reveal>
         <div class="flavor-card__media img"></div>
         <div class="flavor-card__top">
           <h3>NOKSU 24</h3>
@@ -105,7 +105,7 @@ Footer      → default → 3-9
         </div>
         <div class="flavor-card__cta"><a href="#" class="btn btn--white">view more</a></div>
       </article>
-      <article class="flavor-card" style="grid-column:5/9" data-reveal>
+      <article class="flavor-card" data-reveal>
         <div class="flavor-card__media img"></div>
         <div class="flavor-card__top">
           <h3>NOKSU 일품</h3>
@@ -113,10 +113,34 @@ Footer      → default → 3-9
         </div>
         <div class="flavor-card__cta"><a href="#" class="btn btn--white">view more</a></div>
       </article>
-      <article class="flavor-card" style="grid-column:9/13" data-reveal>
+      <article class="flavor-card" data-reveal>
         <div class="flavor-card__media img"></div>
         <div class="flavor-card__top">
           <h3>NOKSU 자몽</h3>
+          <span class="badge-outline">ALC 13.0%</span>
+        </div>
+        <div class="flavor-card__cta"><a href="#" class="btn btn--white">view more</a></div>
+      </article>
+      <article class="flavor-card" data-reveal>
+        <div class="flavor-card__media img"></div>
+        <div class="flavor-card__top">
+          <h3>NOKSU 청포도</h3>
+          <span class="badge-outline">ALC 13.0%</span>
+        </div>
+        <div class="flavor-card__cta"><a href="#" class="btn btn--white">view more</a></div>
+      </article>
+      <article class="flavor-card" data-reveal>
+        <div class="flavor-card__media img"></div>
+        <div class="flavor-card__top">
+          <h3>NOKSU 자두</h3>
+          <span class="badge-outline">ALC 13.0%</span>
+        </div>
+        <div class="flavor-card__cta"><a href="#" class="btn btn--white">view more</a></div>
+      </article>
+      <article class="flavor-card" data-reveal>
+        <div class="flavor-card__media img"></div>
+        <div class="flavor-card__top">
+          <h3>NOKSU 딸기</h3>
           <span class="badge-outline">ALC 13.0%</span>
         </div>
         <div class="flavor-card__cta"><a href="#" class="btn btn--white">view more</a></div>
