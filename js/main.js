@@ -74,6 +74,27 @@
     }, { passive: true });
     window.addEventListener('resize', updateActive);
     updateActive();
+
+    // ---------- prev/next arrows: step by one card width ----------
+    const prevBtn = document.getElementById('flavorPrev');
+    const nextBtn = document.getElementById('flavorNext');
+    const step = (dir) => {
+      const card = cards[0];
+      const gap = parseFloat(getComputedStyle(track).columnGap || 0);
+      track.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: 'smooth' });
+    };
+    prevBtn?.addEventListener('click', () => step(-1));
+    nextBtn?.addEventListener('click', () => step(1));
+    const updateNavButtons = () => {
+      if (!prevBtn || !nextBtn) return;
+      prevBtn.disabled = track.scrollLeft <= 4;
+      nextBtn.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+    };
+    track.addEventListener('scroll', () => {
+      if (!ticking) requestAnimationFrame(updateNavButtons);
+    }, { passive: true });
+    window.addEventListener('resize', updateNavButtons);
+    updateNavButtons();
   }
 
   // ---------- hero pagination: clicking a small circle swaps the hero copy + tint ----------

@@ -103,7 +103,7 @@ body{background:var(--brand-cream);}
   padding:var(--space-9) var(--space-5) var(--space-6);}
 .flavor-track::-webkit-scrollbar{display:none;}
 .flavor-card{position:relative;overflow:visible;
-  scroll-snap-align:center;flex:0 0 calc((100% - 2 * var(--grid-gutter-lg)) / 3);min-width:280px;
+  scroll-snap-align:center;flex:0 0 60%;min-width:280px;
   min-height:400px;cursor:grab;transition:transform .35s ease;}
 .flavor-card:active{cursor:grabbing;}
 .flavor-card__bg{position:absolute;inset:0;z-index:1;border-radius:var(--radius-lg);overflow:hidden;}
@@ -112,11 +112,18 @@ body{background:var(--brand-cream);}
 /* Title sits in its own layer above the image (z-index:3 > media's 2) so it visually
    overlaps/sits on top of the product art where the two intersect, not underneath it. */
 .flavor-card__top{position:absolute;z-index:3;inset-inline:0;bottom:0;
-  padding:var(--space-6);color:#fff;text-align:center;text-shadow:0 1px 12px rgb(0 0 0 / .35);}
+  padding:var(--space-6);color:#fff;text-align:left;}
 .flavor-card h3{font-size:var(--fs-h3);text-transform:uppercase;margin-bottom:var(--space-4);
   max-width:100%;}
-.flavor-card .badge-outline{color:#fff;background:rgb(0 0 0 / .25);}
+.flavor-card .badge-outline{color:#fff;}
 .flavor-card .btn{width:max-content;}
+
+/* ---------- flavor track nav (prev/next arrows below, matching the reference) ---------- */
+.flavor-nav{display:flex;justify-content:center;gap:var(--space-3);margin-top:var(--space-5);}
+.flavor-nav__btn{width:56px;height:56px;border-radius:var(--radius-circle);background:var(--brand-ink);
+  color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:var(--fs-h3);}
+.flavor-nav__btn:disabled{opacity:.35;cursor:default;}
 
 /* Centered card in the swipe track gets a small lift/priority — polish on top of the
    always-on pop-out above, not a substitute for it. */
@@ -188,10 +195,10 @@ body{background:var(--brand-cream);}
   .hero__arc{transform:scale(.7);transform-origin:bottom right;}
 }
 @media (max-width:1024px){
-  .flavor-card{flex-basis:calc((100% - var(--grid-gutter-md)) / 2);}
+  .flavor-card{flex-basis:70%;}
 }
 @media (max-width:768px){
   .blog-card{grid-column:1/13 !important;}
-  .flavor-card{flex-basis:85%;}
+  .flavor-card{flex-basis:80%;}
   .hero__arc{transform:scale(.5);transform-origin:bottom right;}
 }
