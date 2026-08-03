@@ -144,23 +144,20 @@ body{background:var(--brand-cream);}
   font-size:var(--fs-display-sm);}
 
 /* ---------- pairing flip cards ----------
-   Front = pairing suggestion (image + copy), always resting face-up. Hovering flips a
-   card to its back, which carries its own "how to enjoy" tip copy (not just a bare
-   wordmark) on a distinct brand color per card. Without the -webkit- prefixes on
-   backface-visibility/transform-style, back-face culling silently fails in some
-   renderers — the opaque back face then just paints over the front at rest instead of
-   being hidden, which is what made the description text disappear earlier. */
-.flip-card{perspective:1600px;-webkit-perspective:1600px;min-height:420px;}
-.flip-card__inner{position:relative;width:100%;height:100%;
-  transition:transform .6s cubic-bezier(.4,.1,.2,1);
-  transform-style:preserve-3d;-webkit-transform-style:preserve-3d;}
-.flip-card:hover .flip-card__inner{transform:rotateY(180deg);}
-.flip-card__face{position:absolute;inset:0;
-  backface-visibility:hidden;-webkit-backface-visibility:hidden;
-  border-radius:var(--radius-lg);overflow:hidden;}
-.flip-card__face--front{background:#fff;display:flex;flex-direction:column;}
-.flip-card__face--back{transform:rotateY(180deg);color:#fff;
-  display:flex;flex-direction:column;justify-content:flex-end;}
+   Front = pairing suggestion (image + copy), always resting face-up. Hovering crossfades
+   to the back, which carries its own "how to enjoy" tip copy on a distinct brand color
+   per card. This is deliberately a plain opacity crossfade, NOT a 3D rotateY flip: the
+   backface-visibility/preserve-3d approach kept rendering unreliably (content occluded
+   even at rest) across at least two rounds of prefix fixes, so the mechanism itself was
+   dropped rather than patched a third time — opacity has no such cross-renderer risk. */
+.flip-card{position:relative;min-height:420px;}
+.flip-card__inner{position:relative;width:100%;height:100%;}
+.flip-card__face{position:absolute;inset:0;border-radius:var(--radius-lg);overflow:hidden;
+  transition:opacity .4s ease;display:flex;flex-direction:column;}
+.flip-card__face--front{background:#fff;opacity:1;z-index:2;}
+.flip-card__face--back{color:#fff;justify-content:flex-end;opacity:0;z-index:1;pointer-events:none;}
+.flip-card:hover .flip-card__face--front{opacity:0;}
+.flip-card:hover .flip-card__face--back{opacity:1;z-index:3;pointer-events:auto;}
 .flip-card__media{flex:1;}
 .flip-card__body{padding:var(--space-6);}
 .flip-card__body .badge-outline{margin-bottom:var(--space-4);border-color:var(--color-primary-200);}
