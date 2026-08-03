@@ -162,7 +162,7 @@ body{background:var(--brand-cream);}
   backface-visibility:hidden;-webkit-backface-visibility:hidden;
   border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column;}
 .flip-card__face--front{background:#fff;}
-.flip-card__face--back{transform:rotateY(180deg);color:#fff;justify-content:flex-end;}
+.flip-card__face--back{transform:rotateY(180deg);color:#fff;justify-content:center;}
 /* Fixed px, not aspect-ratio — a live aspect-ratio calc on a flex child was the exact
    thing that caused the text-clipping bug two commits ago. A fixed square-ish height at
    typical card width is a deliberate, more robust tradeoff over intrinsic sizing. */
