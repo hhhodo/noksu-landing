@@ -53,40 +53,53 @@ Footer      → default → 3-9
 
 <!-- Hero — full-bleed -->
 <section class="hero">
-  <div class="hero__media img"></div>
+  <div class="hero__media">
+    <div class="img" style="width:100%;height:100%"></div>
+    <div class="hero__media-tint" id="heroTint" style="background-color:var(--brand-bubble-1)"></div>
+  </div>
   <div class="container container--wide hero__content">
     <div class="hero__panel">
-      <div class="hero__info" data-reveal>
-        <span class="badge-outline">ALC 13.0%</span>
-        <h2>NOKSU 그린 그레이프</h2>
-        <p class="body-1">청포도 향 가득한 부드러운 크래프트 소주</p>
+      <div class="hero__info" id="heroInfo" data-reveal>
+        <span class="badge-outline" id="heroAlc">ALC 13.0%</span>
+        <h2 id="heroName">NOKSU 그린 그레이프</h2>
+        <p class="body-1" id="heroDesc">청포도 향 가득한 부드러운 크래프트 소주</p>
         <a href="#flavor" class="btn btn--solid">자세히 보기</a>
       </div>
-      <div class="hero__arc" data-reveal>
-        <div class="hero__arc-item" style="--a:-90deg">
-          <span class="hero__bubble" style="background:var(--brand-bubble-1)"><span class="img" style="width:100%;height:100%"></span></span>
-        </div>
-        <div class="hero__arc-item" style="--a:-75deg">
-          <span class="hero__bubble" style="background:var(--brand-bubble-2)"><span class="img" style="width:100%;height:100%"></span></span>
-        </div>
-        <div class="hero__arc-item" style="--a:-60deg">
-          <span class="hero__bubble" style="background:var(--brand-bubble-3)"><span class="img" style="width:100%;height:100%"></span></span>
-        </div>
-        <div class="hero__arc-item" style="--a:-45deg">
-          <span class="hero__bubble" style="background:var(--brand-bubble-4)"><span class="img" style="width:100%;height:100%"></span></span>
-        </div>
-        <div class="hero__arc-item" style="--a:-30deg">
-          <span class="hero__bubble" style="background:var(--brand-bubble-5)"><span class="img" style="width:100%;height:100%"></span></span>
-        </div>
-        <div class="hero__arc-item" style="--a:-15deg">
-          <span class="hero__bubble" style="background:var(--brand-bubble-6)"><span class="img" style="width:100%;height:100%"></span></span>
-        </div>
-        <div class="hero__arc-item" style="--a:0deg">
-          <span class="hero__bubble" style="background:var(--brand-bubble-7)"><span class="img" style="width:100%;height:100%"></span></span>
-        </div>
-        <button class="hero__cta">SHOT</button>
-      </div>
     </div>
+  </div>
+
+  <!-- SHOT is the pivot; small circles orbit it, each a per-product image holder
+       (brand color + gray placeholder) that swaps the hero copy/tint on click. -->
+  <div class="hero__arc" data-reveal>
+    <button class="hero__bubble is-active" style="--a:-90deg;--r:190px;background:var(--brand-bubble-1)"
+      data-name="NOKSU 그린 그레이프" data-alc="ALC 13.0%" data-desc="청포도 향 가득한 부드러운 크래프트 소주" data-tint="var(--brand-bubble-1)">
+      <span class="img"></span>
+    </button>
+    <button class="hero__bubble" style="--a:-75deg;--r:190px;background:var(--brand-bubble-2)"
+      data-name="NOKSU 24" data-alc="ALC 24.0%" data-desc="묵직하게 즐기는 프리미엄 증류 소주" data-tint="var(--brand-bubble-2)">
+      <span class="img"></span>
+    </button>
+    <button class="hero__bubble" style="--a:-60deg;--r:190px;background:var(--brand-bubble-3)"
+      data-name="NOKSU 일품" data-alc="ALC 25.0%" data-desc="깊고 진한 전통 증류 소주" data-tint="var(--brand-bubble-3)">
+      <span class="img"></span>
+    </button>
+    <button class="hero__bubble" style="--a:-45deg;--r:190px;background:var(--brand-bubble-4)"
+      data-name="NOKSU 자몽" data-alc="ALC 13.0%" data-desc="상큼한 자몽 한 조각을 담은 소주" data-tint="var(--brand-bubble-4)">
+      <span class="img"></span>
+    </button>
+    <button class="hero__bubble" style="--a:-30deg;--r:190px;background:var(--brand-bubble-5)"
+      data-name="NOKSU 청포도" data-alc="ALC 13.0%" data-desc="싱그러운 청포도 향이 감도는 소주" data-tint="var(--brand-bubble-5)">
+      <span class="img"></span>
+    </button>
+    <button class="hero__bubble" style="--a:-15deg;--r:190px;background:var(--brand-bubble-6)"
+      data-name="NOKSU 자두" data-alc="ALC 13.0%" data-desc="새콤달콤 자두 향의 산뜻한 소주" data-tint="var(--brand-bubble-6)">
+      <span class="img"></span>
+    </button>
+    <button class="hero__bubble" style="--a:0deg;--r:190px;background:var(--brand-bubble-7)"
+      data-name="NOKSU 딸기" data-alc="ALC 13.0%" data-desc="달콤한 딸기 향이 은은하게 퍼지는 소주" data-tint="var(--brand-bubble-7)">
+      <span class="img"></span>
+    </button>
+    <button class="hero__cta">SHOT</button>
   </div>
 </section>
 

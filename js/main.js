@@ -75,4 +75,29 @@
     window.addEventListener('resize', updateActive);
     updateActive();
   }
+
+  // ---------- hero pagination: clicking a small circle swaps the hero copy + tint ----------
+  const heroInfo = document.getElementById('heroInfo');
+  const heroAlc = document.getElementById('heroAlc');
+  const heroName = document.getElementById('heroName');
+  const heroDesc = document.getElementById('heroDesc');
+  const heroTint = document.getElementById('heroTint');
+  const heroBubbles = document.querySelectorAll('.hero__bubble');
+
+  heroBubbles.forEach((bubble) => {
+    bubble.addEventListener('click', () => {
+      if (bubble.classList.contains('is-active')) return;
+      heroBubbles.forEach((b) => b.classList.remove('is-active'));
+      bubble.classList.add('is-active');
+
+      heroInfo.classList.add('is-swapping');
+      window.setTimeout(() => {
+        heroAlc.textContent = bubble.dataset.alc;
+        heroName.textContent = bubble.dataset.name;
+        heroDesc.textContent = bubble.dataset.desc;
+        heroTint.style.backgroundColor = bubble.dataset.tint;
+        heroInfo.classList.remove('is-swapping');
+      }, 200);
+    });
+  });
 })();

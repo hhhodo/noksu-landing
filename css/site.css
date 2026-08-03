@@ -38,27 +38,35 @@ body{background:var(--brand-cream);}
 /* ---------- hero (photo area = placeholder gray per brief) ---------- */
 .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;}
 .hero__media{position:absolute;inset:0;z-index:0;}
-.hero__content{position:relative;z-index:1;width:100%;padding-block-end:var(--space-8);}
-.hero__panel{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--space-6);flex-wrap:wrap;}
+.hero__media-tint{position:absolute;inset:0;opacity:.4;mix-blend-mode:multiply;
+  transition:background-color .4s ease;pointer-events:none;}
+.hero__content{position:relative;z-index:1;width:100%;height:100%;padding-block-end:var(--space-8);}
+.hero__panel{display:flex;align-items:flex-end;height:100%;}
 .hero__info{color:var(--text-default-inverse);max-width:26ch;}
 .hero__info .badge-outline{margin-bottom:var(--space-4);}
-.hero__info h2{margin-block:var(--space-3);}
-.hero__info p{margin-bottom:var(--space-5);}
-/* Hero circular pagination — reproduces the Figma construction: each bubble
-   sits at the top of a 520px circle, and that circle is rotated -90deg..0deg
-   in 15deg steps, sweeping the 7 bubbles along a quarter-arc (west → north).
-   The bubble itself is counter-rotated so its content stays upright. */
-.hero__arc{position:relative;width:520px;height:520px;}
-.hero__arc-item{position:absolute;inset:0;display:flex;justify-content:center;
-  transform:rotate(var(--a));}
-.hero__bubble{position:absolute;top:0;width:54px;height:54px;border-radius:var(--radius-circle);
-  display:flex;align-items:center;justify-content:center;overflow:hidden;
-  transform:rotate(calc(-1 * var(--a)));}
-.hero__bubble img{width:100%;height:100%;object-fit:cover;}
-.hero__cta{position:absolute;left:126px;top:126px;width:140px;height:140px;border-radius:var(--radius-circle);
+.hero__info h2{margin-block:var(--space-3);transition:opacity .25s ease;}
+.hero__info p{margin-bottom:var(--space-5);transition:opacity .25s ease;}
+.hero__info.is-swapping h2,.hero__info.is-swapping p,.hero__info.is-swapping .badge-outline{opacity:0;}
+
+/* Hero pagination — SHOT is pinned to the hero's bottom-right corner and IS the
+   pivot: each small circle (a per-product image holder — brand color + gray
+   placeholder) sits at a fixed radius from SHOT's center, swept -90deg..0deg in
+   15deg steps (a quarter-arc from west to north), matching the reference's
+   angular spread. Clicking a circle swaps the hero copy + a color tint over the
+   placeholder banner. */
+.hero__arc{position:absolute;z-index:1;right:var(--gutter);bottom:var(--space-8);width:140px;height:140px;}
+.hero__cta{position:absolute;inset:0;width:140px;height:140px;border-radius:var(--radius-circle);
   background:var(--brand-ink);color:#fff;display:flex;align-items:center;justify-content:center;
   font-size:var(--fs-body-1);font-weight:var(--fw-strong);letter-spacing:.075em;text-transform:uppercase;
   border:none;cursor:pointer;}
+.hero__bubble{position:absolute;top:50%;left:50%;width:54px;height:54px;margin:-27px;
+  transform:rotate(var(--a)) translateY(calc(-1 * var(--r))) rotate(calc(-1 * var(--a)));
+  border-radius:var(--radius-circle);border:2px solid transparent;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;
+  padding:0;transition:transform .25s ease,border-color .2s ease;}
+.hero__bubble:hover{transform:rotate(var(--a)) translateY(calc(-1 * var(--r))) rotate(calc(-1 * var(--a))) scale(1.1);}
+.hero__bubble.is-active{border-color:#fff;}
+.hero__bubble .img{width:100%;height:100%;border-radius:var(--radius-circle);}
 
 /* ---------- badges ---------- */
 .badge-outline{display:inline-flex;align-items:center;height:40px;padding-inline:var(--space-4);
