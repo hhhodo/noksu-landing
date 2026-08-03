@@ -122,7 +122,7 @@ body{background:var(--brand-cream);}
   padding:var(--space-6);color:#fff;text-align:left;}
 .flavor-card h3{font-size:var(--fs-h3);text-transform:uppercase;margin-bottom:var(--space-4);
   max-width:100%;}
-.flavor-card .badge-outline{color:#fff;height:auto;padding-block:var(--space-2);}
+.flavor-card .badge-outline{color:#fff;}
 .flavor-card .btn{width:max-content;}
 
 /* ---------- flavor track nav (prev/next arrows below, matching the reference) ---------- */
@@ -172,7 +172,7 @@ body{background:var(--brand-cream);}
    outer face-level justify-content only positions body as a whole among its siblings,
    it doesn't touch how body's own children sit inside it. */
 .flip-card__body{flex:1;min-height:0;padding:var(--space-6);text-align:left;
-  display:flex;flex-direction:column;justify-content:center;}
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;}
 .flip-card__body .badge-outline{margin-bottom:var(--space-4);border-color:var(--color-primary-200);}
 .flip-card__body h4{font-size:var(--fs-h3);margin-bottom:var(--space-3);}
 .flip-card__body p{color:var(--text-subtle);}
