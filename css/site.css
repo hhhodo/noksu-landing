@@ -113,8 +113,9 @@ body{background:var(--brand-cream);}
 .flavor-card.is-active{opacity:1;}
 .flavor-card__bg{position:absolute;inset:0;z-index:1;border-radius:var(--radius-lg);overflow:hidden;}
 .flavor-card__media{position:absolute;z-index:2;left:50%;top:calc(-1 * var(--space-7));
-  transform:translateX(-50%);width:56%;height:calc(100% + var(--space-8));border-radius:var(--radius-sm);
-  background-color:transparent;}
+  transform:translateX(-50%) rotate(8deg);width:66%;height:calc(100% + var(--space-9));border-radius:var(--radius-sm);
+  background-color:transparent;
+  filter:drop-shadow(0 40px 50px color-mix(in srgb, var(--card-color, #000) 10%, transparent));}
 /* Title sits in its own layer above the image (z-index:3 > media's 2) so it visually
    overlaps/sits on top of the product art where the two intersect, not underneath it. */
 .flavor-card__top{position:absolute;z-index:3;inset-inline:0;bottom:0;
