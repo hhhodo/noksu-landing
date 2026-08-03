@@ -38,8 +38,6 @@ body{background:var(--brand-cream);}
 /* ---------- hero (photo area = placeholder gray per brief) ---------- */
 .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;}
 .hero__media{position:absolute;inset:0;z-index:0;}
-.hero__media-tint{position:absolute;inset:0;opacity:.4;mix-blend-mode:multiply;
-  transition:background-color .4s ease;pointer-events:none;}
 .hero__content{position:relative;z-index:1;width:100%;height:100%;padding-block-end:var(--space-8);}
 .hero__panel{display:flex;align-items:flex-end;height:100%;}
 .hero__info{color:var(--text-default-inverse);max-width:26ch;}

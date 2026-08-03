@@ -144,7 +144,6 @@
   const heroAlc = document.getElementById('heroAlc');
   const heroName = document.getElementById('heroName');
   const heroDesc = document.getElementById('heroDesc');
-  const heroTint = document.getElementById('heroTint');
   const heroMedia = document.getElementById('heroMedia');
   const heroBubbles = document.querySelectorAll('.hero__bubble');
 
@@ -160,7 +159,6 @@
         heroAlc.textContent = bubble.dataset.alc;
         heroName.textContent = bubble.dataset.name;
         heroDesc.textContent = bubble.dataset.desc;
-        heroTint.style.backgroundColor = bubble.dataset.tint;
         if (bubble.dataset.media) heroMedia.style.backgroundImage = `url('${bubble.dataset.media}')`;
         heroInfo.classList.remove('is-swapping');
         heroMedia.style.opacity = 1;
