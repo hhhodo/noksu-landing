@@ -66,7 +66,7 @@ body{background:var(--brand-cream);}
   padding:0;transition:transform .25s ease,border-color .2s ease;}
 .hero__bubble:hover{transform:rotate(var(--a)) translateY(calc(-1 * var(--r))) rotate(calc(-1 * var(--a))) scale(1.1);}
 .hero__bubble.is-active{border-color:#fff;}
-.hero__bubble .img{width:100%;height:100%;border-radius:var(--radius-circle);}
+.hero__bubble .img{width:100%;height:100%;border-radius:var(--radius-circle);background-color:transparent;}
 
 /* ---------- badges ---------- */
 .badge-outline{display:inline-flex;align-items:center;height:40px;padding-inline:var(--space-4);
@@ -115,7 +115,8 @@ body{background:var(--brand-cream);}
 .flavor-card.is-active{opacity:1;}
 .flavor-card__bg{position:absolute;inset:0;z-index:1;border-radius:var(--radius-lg);overflow:hidden;}
 .flavor-card__media{position:absolute;z-index:2;left:50%;top:calc(-1 * var(--space-7));
-  transform:translateX(-50%);width:56%;height:calc(100% + var(--space-8));border-radius:var(--radius-sm);}
+  transform:translateX(-50%);width:56%;height:calc(100% + var(--space-8));border-radius:var(--radius-sm);
+  background-color:transparent;}
 /* Title sits in its own layer above the image (z-index:3 > media's 2) so it visually
    overlaps/sits on top of the product art where the two intersect, not underneath it. */
 .flavor-card__top{position:absolute;z-index:3;inset-inline:0;bottom:0;

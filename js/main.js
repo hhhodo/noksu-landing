@@ -145,6 +145,7 @@
   const heroName = document.getElementById('heroName');
   const heroDesc = document.getElementById('heroDesc');
   const heroTint = document.getElementById('heroTint');
+  const heroMedia = document.getElementById('heroMedia');
   const heroBubbles = document.querySelectorAll('.hero__bubble');
 
   heroBubbles.forEach((bubble) => {
@@ -154,12 +155,15 @@
       bubble.classList.add('is-active');
 
       heroInfo.classList.add('is-swapping');
+      heroMedia.style.opacity = 0;
       window.setTimeout(() => {
         heroAlc.textContent = bubble.dataset.alc;
         heroName.textContent = bubble.dataset.name;
         heroDesc.textContent = bubble.dataset.desc;
         heroTint.style.backgroundColor = bubble.dataset.tint;
+        if (bubble.dataset.media) heroMedia.style.backgroundImage = `url('${bubble.dataset.media}')`;
         heroInfo.classList.remove('is-swapping');
+        heroMedia.style.opacity = 1;
       }, 200);
     });
   });
