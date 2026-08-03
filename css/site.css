@@ -103,7 +103,7 @@ body{background:var(--brand-cream);}
 .flavor-track{--card-w:min(640px, 62vw);
   display:flex;gap:var(--grid-gutter-lg);overflow-x:auto;overflow-y:hidden;
   scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;
-  padding-block:var(--space-9) var(--space-6);
+  padding-block:calc(var(--space-9) + 50px) var(--space-6);
   padding-inline:calc((100vw - var(--card-w)) / 2);}
 .flavor-track::-webkit-scrollbar{display:none;}
 .flavor-card{position:relative;overflow:visible;opacity:.45;
@@ -112,7 +112,7 @@ body{background:var(--brand-cream);}
 .flavor-card:active{cursor:grabbing;}
 .flavor-card.is-active{opacity:1;}
 .flavor-card__bg{position:absolute;inset:0;z-index:1;border-radius:var(--radius-lg);overflow:hidden;}
-.flavor-card__media{position:absolute;z-index:2;left:50%;top:calc(-1 * var(--space-7));
+.flavor-card__media{position:absolute;z-index:2;left:calc(50% + 50px);top:calc(-1 * var(--space-7) - 50px);
   transform:translateX(-50%) rotate(8deg);width:66%;height:calc(100% + var(--space-9));border-radius:var(--radius-sm);
   background-color:transparent;
   filter:drop-shadow(0 40px 50px color-mix(in srgb, var(--card-color, #000) 10%, transparent));}
