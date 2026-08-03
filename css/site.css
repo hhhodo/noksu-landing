@@ -94,9 +94,10 @@ body{background:var(--brand-cream);}
    Reference: each card is a flat color panel with the label top-left, and the product
    photo (bottle + fruit prop) sits toward the right, taller and wider than the panel so
    it overflows both the TOP and RIGHT edges into the surrounding cream background — on
-   every card at rest, not just a focused/active one. Reproduced as two layered siblings:
-   .flavor-card__panel is the rounded, clipped color background holding the text; the
-   image itself (.flavor-card__media) is a sibling that is free to bulge outside it. */
+   every card at rest, not just a focused/active one. Three stacked layers, lowest to
+   highest z-index: .flavor-card__bg (rounded, clipped color fill) → .flavor-card__media
+   (the product art, free to bulge past the bg's edges) → .flavor-card__top (title/badge,
+   stacked above the image so it visually overlaps/sits on top of it, not underneath). */
 .flavor-track{display:flex;gap:var(--grid-gutter-lg);overflow-x:auto;overflow-y:hidden;
   scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;
   padding:var(--space-9) var(--space-5) var(--space-6);}
@@ -105,15 +106,16 @@ body{background:var(--brand-cream);}
   scroll-snap-align:center;flex:0 0 calc((100% - 2 * var(--grid-gutter-lg)) / 3);min-width:280px;
   min-height:400px;cursor:grab;transition:transform .35s ease;}
 .flavor-card:active{cursor:grabbing;}
-.flavor-card__panel{position:absolute;inset:0;z-index:1;border-radius:var(--radius-lg);
-  overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;
-  padding:var(--space-6);color:#fff;pointer-events:none;text-align:center;}
-.flavor-card__panel > *{pointer-events:auto;}
+.flavor-card__bg{position:absolute;inset:0;z-index:1;border-radius:var(--radius-lg);overflow:hidden;}
 .flavor-card__media{position:absolute;z-index:2;left:50%;top:calc(-1 * var(--space-7));
   transform:translateX(-50%);width:56%;height:calc(100% + var(--space-8));border-radius:var(--radius-sm);}
+/* Title sits in its own layer above the image (z-index:3 > media's 2) so it visually
+   overlaps/sits on top of the product art where the two intersect, not underneath it. */
+.flavor-card__top{position:absolute;z-index:3;inset-inline:0;bottom:0;
+  padding:var(--space-6);color:#fff;text-align:center;text-shadow:0 1px 12px rgb(0 0 0 / .35);}
 .flavor-card h3{font-size:var(--fs-h3);text-transform:uppercase;margin-bottom:var(--space-4);
   max-width:100%;}
-.flavor-card .badge-outline{color:#fff;}
+.flavor-card .badge-outline{color:#fff;background:rgb(0 0 0 / .25);}
 .flavor-card .btn{width:max-content;}
 
 /* Centered card in the swipe track gets a small lift/priority — polish on top of the
