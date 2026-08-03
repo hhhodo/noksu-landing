@@ -184,7 +184,8 @@ body{background:var(--brand-cream);}
    on the back, where body is the only child, that same flex:1 stretches it to fill the
    entire face height, leaving no leftover space for the parent's justify-content:center
    to center within. Revert to natural content size here so centering actually applies. */
-.flip-card__face--back .flip-card__body{flex:0 1 auto;margin-block:auto;}
+.flip-card__face--back .flip-card__body{flex:0 1 auto;margin-block:auto;
+  align-items:center;text-align:center;}
 
 /* ---------- burn level ---------- */
 .burn{background:var(--brand-yellow);}
