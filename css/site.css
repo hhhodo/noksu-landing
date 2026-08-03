@@ -42,7 +42,7 @@ body{background:var(--brand-cream);}
 .hero__panel{display:flex;align-items:flex-end;height:100%;}
 .hero__info{color:var(--text-default-inverse);max-width:26ch;}
 .hero__info .badge-outline{margin-bottom:var(--space-4);}
-.hero__info h2{margin-block:var(--space-3);transition:opacity .25s ease;}
+.hero__info h2{margin-block:var(--space-3);transition:opacity .25s ease;white-space:nowrap;}
 .hero__info p{margin-bottom:var(--space-5);transition:opacity .25s ease;}
 .hero__info.is-swapping h2,.hero__info.is-swapping p,.hero__info.is-swapping .badge-outline{opacity:0;}
 
