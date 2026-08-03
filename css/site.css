@@ -167,7 +167,7 @@ body{background:var(--brand-cream);}
    thing that caused the text-clipping bug two commits ago. A fixed square-ish height at
    typical card width is a deliberate, more robust tradeoff over intrinsic sizing. */
 .flip-card__media{flex:0 0 340px;height:340px;}
-.flip-card__body{flex:1;min-height:0;padding:var(--space-6);}
+.flip-card__body{flex:1;min-height:0;padding:var(--space-6);text-align:left;}
 .flip-card__body .badge-outline{margin-bottom:var(--space-4);border-color:var(--color-primary-200);}
 .flip-card__body h4{font-size:var(--fs-h3);margin-bottom:var(--space-3);}
 .flip-card__body p{color:var(--text-subtle);}
