@@ -144,22 +144,27 @@ body{background:var(--brand-cream);}
   font-size:var(--fs-display-sm);}
 
 /* ---------- pairing flip cards ----------
-   Front = pairing suggestion (image + copy), always resting face-up. Hovering crossfades
-   to the back, which carries its own "how to enjoy" tip copy on a distinct brand color
-   per card. This is deliberately a plain opacity crossfade, NOT a 3D rotateY flip: the
-   backface-visibility/preserve-3d approach kept rendering unreliably (content occluded
-   even at rest) across at least two rounds of prefix fixes, so the mechanism itself was
-   dropped rather than patched a third time — opacity has no such cross-renderer risk. */
-.flip-card{position:relative;min-height:420px;}
-.flip-card__inner{position:relative;width:100%;height:100%;}
-.flip-card__face{position:absolute;inset:0;border-radius:var(--radius-lg);overflow:hidden;
-  transition:opacity .4s ease;display:flex;flex-direction:column;}
-.flip-card__face--front{background:#fff;opacity:1;z-index:2;}
-.flip-card__face--back{color:#fff;justify-content:flex-end;opacity:0;z-index:1;pointer-events:none;}
-.flip-card:hover .flip-card__face--front{opacity:0;}
-.flip-card:hover .flip-card__face--back{opacity:1;z-index:3;pointer-events:auto;}
-.flip-card__media{flex:1;}
-.flip-card__body{padding:var(--space-6);}
+   Front = pairing suggestion (image + copy), always resting face-up; hovering rotates to
+   the back, which carries its own "how to enjoy" tip copy on a distinct brand color per
+   card. Real 3D rotateY flip, restored. The actual bug behind "text missing" was never
+   backface-visibility support — it was .flip-card__media{flex:1} fighting the img--4-3
+   aspect-ratio for space inside a fixed-height flex column: the media could end up
+   claiming more height than intended, squeezing .flip-card__body below what its content
+   needed, and overflow:hidden on the face then silently clipped the title/description.
+   Fixed by giving media a fixed height instead of flex:1, so body always gets a
+   guaranteed, sufficient remainder. */
+.flip-card{perspective:1600px;-webkit-perspective:1600px;min-height:420px;}
+.flip-card__inner{position:relative;width:100%;height:100%;
+  transition:transform .6s cubic-bezier(.4,.1,.2,1);
+  transform-style:preserve-3d;-webkit-transform-style:preserve-3d;}
+.flip-card:hover .flip-card__inner{transform:rotateY(180deg);}
+.flip-card__face{position:absolute;inset:0;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column;}
+.flip-card__face--front{background:#fff;}
+.flip-card__face--back{transform:rotateY(180deg);color:#fff;justify-content:flex-end;}
+.flip-card__media{flex:0 0 200px;}
+.flip-card__body{flex:1;min-height:0;padding:var(--space-6);}
 .flip-card__body .badge-outline{margin-bottom:var(--space-4);border-color:var(--color-primary-200);}
 .flip-card__body h4{font-size:var(--fs-h3);margin-bottom:var(--space-3);}
 .flip-card__body p{color:var(--text-subtle);}
