@@ -188,9 +188,9 @@ body{background:var(--brand-cream);}
 /* ---------- burn level ---------- */
 .burn{background:var(--brand-ink);}
 .burn__panel{display:flex;gap:var(--space-8);align-items:stretch;padding-block:var(--space-8);}
-.burn__badge{flex:668 0 0;background:#fff;border-radius:var(--radius-lg);
-  display:flex;flex-direction:column;align-items:center;gap:var(--space-6);
-  padding:var(--space-8) var(--space-7);}
+.burn__badge{position:relative;overflow:hidden;flex:668 0 0;background:#fff;border-radius:var(--radius-lg);}
+.burn__badge .badge-solid{position:absolute;z-index:1;top:var(--space-6);left:var(--space-6);}
+.burn__badge .img{position:absolute;inset:0;width:100%;height:100%;}
 .burn__copy{flex:556 0 0;display:flex;flex-direction:column;justify-content:center;gap:var(--space-6);
   color:var(--text-default-inverse);}
 .burn__copy h2{font-size:var(--fs-display-md);letter-spacing:-.02em;}
