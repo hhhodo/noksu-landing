@@ -46,17 +46,10 @@ body{background:var(--brand-cream);}
 .hero__info p{margin-bottom:var(--space-5);transition:opacity .25s ease;}
 .hero__info.is-swapping h2,.hero__info.is-swapping p,.hero__info.is-swapping .badge-outline{opacity:0;}
 
-/* Hero pagination — SHOT is pinned to the hero's bottom-right corner and IS the
-   pivot: each small circle (a per-product image holder — brand color + gray
-   placeholder) sits at a fixed radius from SHOT's center, swept -90deg..0deg in
-   15deg steps (a quarter-arc from west to north), matching the reference's
-   angular spread. Clicking a circle swaps the hero copy + a color tint over the
-   placeholder banner. */
+/* Hero pagination — small circles pinned to the hero's bottom-right corner, each
+   a per-product image, swept -90deg..0deg in 15deg steps (a quarter-arc from west
+   to north). Clicking a circle swaps the hero copy + background photo. */
 .hero__arc{position:absolute;z-index:1;right:var(--gutter);bottom:var(--space-8);width:140px;height:140px;}
-.hero__cta{position:absolute;inset:0;width:140px;height:140px;border-radius:var(--radius-circle);
-  background:var(--brand-ink);color:#fff;display:flex;align-items:center;justify-content:center;
-  font-size:var(--fs-body-1);font-weight:var(--fw-strong);letter-spacing:.075em;text-transform:uppercase;
-  border:none;cursor:pointer;}
 .hero__bubble{position:absolute;top:50%;left:50%;width:54px;height:54px;margin:-27px;
   transform:rotate(var(--a)) translateY(calc(-1 * var(--r))) rotate(calc(-1 * var(--a)));
   border-radius:var(--radius-circle);border:2px solid transparent;
