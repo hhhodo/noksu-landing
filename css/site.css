@@ -108,20 +108,21 @@ body{background:var(--brand-cream);}
   padding-block:var(--space-9) var(--space-6);
   padding-inline:calc((100vw - var(--card-w)) / 2);}
 .flavor-track::-webkit-scrollbar{display:none;}
-.flavor-card{position:relative;overflow:visible;
+.flavor-card{position:relative;overflow:visible;opacity:.45;
   scroll-snap-align:center;flex:0 0 var(--card-w);min-width:240px;
-  min-height:400px;cursor:grab;transition:transform .35s ease;}
+  min-height:400px;cursor:grab;transition:transform .35s ease,opacity .35s ease;}
 .flavor-card:active{cursor:grabbing;}
+.flavor-card.is-active{opacity:1;}
 .flavor-card__bg{position:absolute;inset:0;z-index:1;border-radius:var(--radius-lg);overflow:hidden;}
 .flavor-card__media{position:absolute;z-index:2;left:50%;top:calc(-1 * var(--space-7));
   transform:translateX(-50%);width:56%;height:calc(100% + var(--space-8));border-radius:var(--radius-sm);}
 /* Title sits in its own layer above the image (z-index:3 > media's 2) so it visually
-   overlaps/sits on top of the product art where the two intersect, not underneath it.
-   Panel colors are now pale tints, so text reads in ink, not white. */
+   overlaps/sits on top of the product art where the two intersect, not underneath it. */
 .flavor-card__top{position:absolute;z-index:3;inset-inline:0;bottom:0;
-  padding:var(--space-6);color:var(--brand-ink);text-align:left;}
+  padding:var(--space-6);color:#fff;text-align:left;}
 .flavor-card h3{font-size:var(--fs-h3);text-transform:uppercase;margin-bottom:var(--space-4);
   max-width:100%;}
+.flavor-card .badge-outline{color:#fff;}
 .flavor-card .btn{width:max-content;}
 
 /* ---------- flavor track nav (prev/next arrows below, matching the reference) ---------- */

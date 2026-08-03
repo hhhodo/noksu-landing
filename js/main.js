@@ -24,9 +24,31 @@
   }, { threshold: 0.2 });
   revealEls.forEach((el) => io.observe(el));
 
-  // ---------- flavor track: mouse/pen drag-to-scroll (touch already swipes natively) ----------
+  // ---------- flavor track: infinite loop (clone set before/after) + drag + arrows ----------
   const track = document.getElementById('flavorTrack');
   if (track) {
+    // Triplicate the card set (clone-before + originals + clone-after) so scrolling in
+    // either direction always has real content to land on. A scroll listener silently
+    // (behavior:'auto', no animation) snaps back into the middle "real" set whenever the
+    // user drifts into a clone zone — since the clone is pixel-identical to the original
+    // at that position, the jump is invisible, giving a seamless infinite loop both ways.
+    const originals = [...track.querySelectorAll('.flavor-card')];
+    const cloneSet = () => originals.map((card) => {
+      const clone = card.cloneNode(true);
+      clone.classList.add('is-visible'); // clones skip the scroll-reveal entrance
+      return clone;
+    });
+    const before = cloneSet();
+    const after = cloneSet();
+    before.forEach((el) => track.insertBefore(el, track.firstChild));
+    after.forEach((el) => track.appendChild(el));
+
+    const cards = [...track.querySelectorAll('.flavor-card')];
+    const setWidth = () => track.scrollWidth / 3;
+
+    // Jump (no animation) to the start of the middle/original set.
+    track.scrollLeft = setWidth();
+
     let isDown = false;
     let startX = 0;
     let startScroll = 0;
@@ -55,7 +77,6 @@
     }, true);
 
     // ---------- center-focus: the card nearest the track's center "escapes" the row ----------
-    const cards = [...track.querySelectorAll('.flavor-card')];
     let ticking = false;
     const updateActive = () => {
       ticking = false;
@@ -69,32 +90,35 @@
       });
       cards.forEach((card) => card.classList.toggle('is-active', card === closest));
     };
+
+    // ---------- infinite wrap: silently re-center once scrolled a full set away ----------
+    const wrapIfNeeded = () => {
+      const w = setWidth();
+      if (track.scrollLeft < w * 0.5) {
+        track.scrollLeft += w;
+      } else if (track.scrollLeft > w * 1.5) {
+        track.scrollLeft -= w;
+      }
+    };
+
     track.addEventListener('scroll', () => {
-      if (!ticking) { ticking = true; requestAnimationFrame(updateActive); }
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => { updateActive(); wrapIfNeeded(); });
+      }
     }, { passive: true });
-    window.addEventListener('resize', updateActive);
+    window.addEventListener('resize', () => { track.scrollLeft = setWidth(); updateActive(); });
     updateActive();
 
-    // ---------- prev/next arrows: step by one card width ----------
+    // ---------- prev/next arrows: step by one card width, always enabled (infinite) ----------
     const prevBtn = document.getElementById('flavorPrev');
     const nextBtn = document.getElementById('flavorNext');
     const step = (dir) => {
-      const card = cards[0];
       const gap = parseFloat(getComputedStyle(track).columnGap || 0);
-      track.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: 'smooth' });
+      track.scrollBy({ left: dir * (originals[0].offsetWidth + gap), behavior: 'smooth' });
     };
     prevBtn?.addEventListener('click', () => step(-1));
     nextBtn?.addEventListener('click', () => step(1));
-    const updateNavButtons = () => {
-      if (!prevBtn || !nextBtn) return;
-      prevBtn.disabled = track.scrollLeft <= 4;
-      nextBtn.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
-    };
-    track.addEventListener('scroll', () => {
-      if (!ticking) requestAnimationFrame(updateNavButtons);
-    }, { passive: true });
-    window.addEventListener('resize', updateNavButtons);
-    updateNavButtons();
   }
 
   // ---------- hero pagination: clicking a small circle swaps the hero copy + tint ----------
