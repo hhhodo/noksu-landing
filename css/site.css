@@ -163,7 +163,7 @@ body{background:var(--brand-cream);}
   border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column;}
 .flip-card__face--front{background:#fff;}
 .flip-card__face--back{transform:rotateY(180deg);color:#fff;justify-content:flex-end;}
-.flip-card__media{flex:0 0 200px;}
+.flip-card__media{flex:0 0 200px;height:200px;}
 .flip-card__body{flex:1;min-height:0;padding:var(--space-6);}
 .flip-card__body .badge-outline{margin-bottom:var(--space-4);border-color:var(--color-primary-200);}
 .flip-card__body h4{font-size:var(--fs-h3);margin-bottom:var(--space-3);}
