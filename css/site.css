@@ -98,24 +98,30 @@ body{background:var(--brand-cream);}
    highest z-index: .flavor-card__bg (rounded, clipped color fill) → .flavor-card__media
    (the product art, free to bulge past the bg's edges) → .flavor-card__top (title/badge,
    stacked above the image so it visually overlaps/sits on top of it, not underneath). */
-.flavor-track{display:flex;gap:var(--grid-gutter-lg);overflow-x:auto;overflow-y:hidden;
+/* Full-bleed: the track itself is a direct child of .section (not .container), so it
+   spans the actual viewport edge to edge. --card-w drives both the card size and the
+   track's own side padding, so at scrollLeft:0 the first card is already centered with
+   an equal peek of its neighbor on both left and right — no post-load scroll needed. */
+.flavor-track{--card-w:min(640px, 62vw);
+  display:flex;gap:var(--grid-gutter-lg);overflow-x:auto;overflow-y:hidden;
   scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;
-  padding:var(--space-9) var(--space-5) var(--space-6);}
+  padding-block:var(--space-9) var(--space-6);
+  padding-inline:calc((100vw - var(--card-w)) / 2);}
 .flavor-track::-webkit-scrollbar{display:none;}
 .flavor-card{position:relative;overflow:visible;
-  scroll-snap-align:center;flex:0 0 60%;min-width:280px;
+  scroll-snap-align:center;flex:0 0 var(--card-w);min-width:240px;
   min-height:400px;cursor:grab;transition:transform .35s ease;}
 .flavor-card:active{cursor:grabbing;}
 .flavor-card__bg{position:absolute;inset:0;z-index:1;border-radius:var(--radius-lg);overflow:hidden;}
 .flavor-card__media{position:absolute;z-index:2;left:50%;top:calc(-1 * var(--space-7));
   transform:translateX(-50%);width:56%;height:calc(100% + var(--space-8));border-radius:var(--radius-sm);}
 /* Title sits in its own layer above the image (z-index:3 > media's 2) so it visually
-   overlaps/sits on top of the product art where the two intersect, not underneath it. */
+   overlaps/sits on top of the product art where the two intersect, not underneath it.
+   Panel colors are now pale tints, so text reads in ink, not white. */
 .flavor-card__top{position:absolute;z-index:3;inset-inline:0;bottom:0;
-  padding:var(--space-6);color:#fff;text-align:left;}
+  padding:var(--space-6);color:var(--brand-ink);text-align:left;}
 .flavor-card h3{font-size:var(--fs-h3);text-transform:uppercase;margin-bottom:var(--space-4);
   max-width:100%;}
-.flavor-card .badge-outline{color:#fff;}
 .flavor-card .btn{width:max-content;}
 
 /* ---------- flavor track nav (prev/next arrows below, matching the reference) ---------- */
@@ -195,10 +201,10 @@ body{background:var(--brand-cream);}
   .hero__arc{transform:scale(.7);transform-origin:bottom right;}
 }
 @media (max-width:1024px){
-  .flavor-card{flex-basis:70%;}
+  .flavor-track{--card-w:74vw;}
 }
 @media (max-width:768px){
   .blog-card{grid-column:1/13 !important;}
-  .flavor-card{flex-basis:80%;}
+  .flavor-track{--card-w:84vw;}
   .hero__arc{transform:scale(.5);transform-origin:bottom right;}
 }
