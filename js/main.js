@@ -40,7 +40,11 @@
     });
     const before = cloneSet();
     const after = cloneSet();
-    before.forEach((el) => track.insertBefore(el, track.firstChild));
+    // insertBefore(el, track.firstChild) would silently reverse the "before" set, since
+    // firstChild changes to the just-inserted node on every iteration. Anchor to the
+    // original first card instead — a fixed reference — so order is preserved.
+    const firstOriginal = track.firstChild;
+    before.forEach((el) => track.insertBefore(el, firstOriginal));
     after.forEach((el) => track.appendChild(el));
 
     const cards = [...track.querySelectorAll('.flavor-card')];
