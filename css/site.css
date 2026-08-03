@@ -137,7 +137,7 @@ body{background:var(--brand-cream);}
 .flavor-card.is-active{z-index:5;transform:translateY(calc(-1 * var(--space-2)));}
 
 /* ---------- crave (full-bleed lifestyle, photo = placeholder gray) ---------- */
-.crave{position:relative;min-height:70vh;display:flex;align-items:flex-end;overflow:hidden;}
+.crave{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;}
 .crave__media{position:absolute;inset:0;z-index:0;}
 .crave__content{position:relative;z-index:1;padding-block-end:var(--space-8);width:100%;}
 .crave__content h2{color:var(--text-default-inverse);margin-bottom:var(--space-6);max-width:16ch;
