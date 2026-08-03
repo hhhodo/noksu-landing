@@ -44,7 +44,14 @@
     after.forEach((el) => track.appendChild(el));
 
     const cards = [...track.querySelectorAll('.flavor-card')];
-    const setWidth = () => track.scrollWidth / 3;
+    // scrollWidth/3 is NOT exactly one set's width: gap is applied uniformly across all
+    // 18 cloned cards (17 gaps total, not a clean 3x6), so dividing by 3 drifts by a
+    // fraction of a gap. That drift meant each wrap-correction jump landed slightly off
+    // the identical layout position, causing a visible flicker/double-render right at
+    // the moment of correction. Measure the true distance directly instead: the pixel
+    // offset between the first card of the "before" clone set and the first card of the
+    // "original" set IS exactly one set's width, immune to gap-rounding.
+    const setWidth = () => cards[originals.length].offsetLeft - cards[0].offsetLeft;
 
     // Jump (no animation) to the start of the middle/original set.
     track.scrollLeft = setWidth();
