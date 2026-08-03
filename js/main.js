@@ -92,6 +92,10 @@
     };
 
     // ---------- infinite wrap: silently re-center once scrolled a full set away ----------
+    // Only runs once scrolling has actually settled (debounced) — correcting scrollLeft
+    // mid-flight during an in-progress smooth-scroll animation (from the arrow buttons)
+    // fights the browser's own animation and causes visible stutter/lag right around
+    // whichever card happens to straddle the wrap boundary.
     const wrapIfNeeded = () => {
       const w = setWidth();
       if (track.scrollLeft < w * 0.5) {
@@ -100,12 +104,15 @@
         track.scrollLeft -= w;
       }
     };
+    let wrapTimer = null;
 
     track.addEventListener('scroll', () => {
       if (!ticking) {
         ticking = true;
-        requestAnimationFrame(() => { updateActive(); wrapIfNeeded(); });
+        requestAnimationFrame(updateActive);
       }
+      clearTimeout(wrapTimer);
+      wrapTimer = setTimeout(wrapIfNeeded, 120);
     }, { passive: true });
     window.addEventListener('resize', () => { track.scrollLeft = setWidth(); updateActive(); });
     updateActive();
