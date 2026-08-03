@@ -175,6 +175,11 @@ body{background:var(--brand-cream);}
    of declaration order. */
 .flip-card__face--back .flip-card__body .badge-outline{border-color:#fff;}
 .flip-card__face--back .flip-card__body p{color:#fff;}
+/* .flip-card__body's flex:1 exists so it shares space with the image on the front face —
+   on the back, where body is the only child, that same flex:1 stretches it to fill the
+   entire face height, leaving no leftover space for the parent's justify-content:center
+   to center within. Revert to natural content size here so centering actually applies. */
+.flip-card__face--back .flip-card__body{flex:0 1 auto;}
 
 /* ---------- burn level ---------- */
 .burn{background:var(--brand-yellow);}
