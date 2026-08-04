@@ -98,11 +98,17 @@ body{background:var(--brand-cream);}
   padding-block:calc(var(--space-9) + 130px) calc(var(--space-9) + 50px);
   padding-inline:calc(var(--card-w) / 2);}
 .flavor-track::-webkit-scrollbar{display:none;}
-.flavor-card{position:relative;overflow:visible;opacity:.5;
+.flavor-card{position:relative;overflow:visible;
   scroll-snap-align:center;flex:0 0 var(--card-w);min-width:240px;
-  min-height:480px;cursor:grab;transition:transform .35s ease,opacity .35s ease;}
+  min-height:480px;cursor:grab;transition:transform .35s ease,opacity .35s ease;
+  transform:scale(.82);}
 .flavor-card:active{cursor:grabbing;}
-.flavor-card.is-active{opacity:1;}
+/* Specificity has to beat [data-reveal].is-visible (0,2,0 — see the reveal-on-scroll
+   rules below), otherwise the intro-reveal animation permanently pins every card at
+   opacity:1 once it's scrolled into view once, and the carousel's own dimming of
+   inactive cards never shows. */
+.flavor-card[data-reveal].is-visible{opacity:.5;}
+.flavor-card.is-active[data-reveal].is-visible{opacity:1;}
 .flavor-card__bg{position:absolute;inset:0;z-index:1;border-radius:var(--radius-lg);overflow:hidden;}
 .flavor-card__media{position:absolute;z-index:2;left:calc(50% + 50px);top:calc(-1 * var(--space-7) - 130px);
   transform:translateX(-50%) rotate(8deg);width:80%;height:calc(100% + var(--space-11));border-radius:var(--radius-sm);
@@ -126,7 +132,7 @@ body{background:var(--brand-cream);}
 
 /* Centered card in the swipe track gets a small lift/priority — polish on top of the
    always-on pop-out above, not a substitute for it. */
-.flavor-card.is-active{z-index:5;transform:translateY(calc(-1 * var(--space-2)));}
+.flavor-card.is-active{z-index:5;transform:scale(1) translateY(calc(-1 * var(--space-2)));}
 
 /* ---------- crave (full-bleed lifestyle, photo = placeholder gray) ---------- */
 .crave{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;}
