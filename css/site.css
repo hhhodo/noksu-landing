@@ -124,7 +124,11 @@ body{background:var(--brand-cream);}
 .flavor-card .btn{width:max-content;}
 
 /* ---------- flavor track nav (prev/next arrows below, matching the reference) ---------- */
-.flavor-nav{display:flex;justify-content:center;gap:var(--space-3);margin-top:var(--space-5);}
+/* Track reserves calc(space-9 + 50px) of bottom padding so the bottle-art drop-shadow
+   doesn't get clipped by overflow-y:hidden — that padding is empty space below the
+   visible cards, so pull the nav up into it instead of letting it sag that far down. */
+.flavor-nav{display:flex;justify-content:center;gap:var(--space-3);
+  margin-top:calc(-1 * (var(--space-9) + 50px) + var(--space-5));}
 .flavor-nav__btn{width:56px;height:56px;border-radius:var(--radius-circle);background:var(--brand-ink);
   color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
   font-size:var(--fs-h3);}
