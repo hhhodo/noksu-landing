@@ -89,18 +89,18 @@ body{background:var(--brand-cream);}
    (the product art, free to bulge past the bg's edges) → .flavor-card__top (title/badge,
    stacked above the image so it visually overlaps/sits on top of it, not underneath). */
 /* Full-bleed: the track itself is a direct child of .section (not .container), so it
-   spans the actual viewport edge to edge. --card-w drives both the card size and the
-   track's own side padding, so at scrollLeft:0 the first card is already centered with
-   an equal peek of its neighbor on both left and right — no post-load scroll needed. */
-.flavor-track{--card-w:min(640px, 62vw);
+   spans the actual viewport edge to edge. Side padding is exactly half of --card-w, so
+   at scrollLeft:0 the first card is centered with precisely half of its neighbor
+   showing on both left and right — no post-load scroll needed. */
+.flavor-track{--card-w:min(880px, 76vw);
   display:flex;gap:var(--grid-gutter-lg);overflow-x:auto;overflow-y:hidden;
   scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;
   padding-block:calc(var(--space-9) + 130px) calc(var(--space-9) + 50px);
-  padding-inline:calc((100vw - var(--card-w)) / 2);}
+  padding-inline:calc(var(--card-w) / 2);}
 .flavor-track::-webkit-scrollbar{display:none;}
-.flavor-card{position:relative;overflow:visible;opacity:.45;
+.flavor-card{position:relative;overflow:visible;opacity:.5;
   scroll-snap-align:center;flex:0 0 var(--card-w);min-width:240px;
-  min-height:400px;cursor:grab;transition:transform .35s ease,opacity .35s ease;}
+  min-height:480px;cursor:grab;transition:transform .35s ease,opacity .35s ease;}
 .flavor-card:active{cursor:grabbing;}
 .flavor-card.is-active{opacity:1;}
 .flavor-card__bg{position:absolute;inset:0;z-index:1;border-radius:var(--radius-lg);overflow:hidden;}
@@ -219,10 +219,10 @@ body{background:var(--brand-cream);}
   .hero__arc{transform:scale(.7);transform-origin:bottom right;}
 }
 @media (max-width:1024px){
-  .flavor-track{--card-w:74vw;}
+  .flavor-track{--card-w:86vw;}
 }
 @media (max-width:768px){
   .flip-card{grid-column:1/13 !important;}
-  .flavor-track{--card-w:84vw;}
+  .flavor-track{--card-w:92vw;}
   .hero__arc{transform:scale(.5);transform-origin:bottom right;}
 }
