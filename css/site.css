@@ -105,10 +105,10 @@ body{background:var(--brand-cream);}
 .flavor-card:active{cursor:grabbing;}
 /* Specificity has to beat [data-reveal].is-visible (0,2,0 — see the reveal-on-scroll
    rules below), otherwise the intro-reveal animation permanently pins every card at
-   opacity:1 once it's scrolled into view once, and the carousel's own dimming of
-   inactive cards never shows. */
-.flavor-card[data-reveal].is-visible{opacity:.5;}
-.flavor-card.is-active[data-reveal].is-visible{opacity:1;}
+   opacity:1 and transform:none once it's scrolled into view once, and the carousel's
+   own dimming/scaling of inactive cards never shows. */
+.flavor-card[data-reveal].is-visible{opacity:.2;transform:scale(.82);}
+.flavor-card.is-active[data-reveal].is-visible{opacity:1;transform:scale(1) translateY(calc(-1 * var(--space-2)));}
 .flavor-card__bg{position:absolute;inset:0;z-index:1;border-radius:var(--radius-lg);overflow:hidden;}
 .flavor-card__media{position:absolute;z-index:2;left:calc(50% + 50px);top:calc(-1 * var(--space-7) - 130px);
   transform:translateX(-50%) rotate(8deg);width:80%;height:calc(100% + var(--space-11));border-radius:var(--radius-sm);
