@@ -194,7 +194,7 @@ body{background:var(--brand-cream);}
 .burn__panel{display:flex;padding-block:var(--space-8);}
 .burn__copy{display:flex;flex-direction:column;align-items:center;text-align:center;
   gap:var(--space-6);margin-inline:auto;color:var(--text-default-inverse);}
-.burn__copy h2{font-size:var(--fs-display-md);letter-spacing:-.02em;}
+.burn__copy h2{font-size:calc(var(--fs-display-md) - 4px);letter-spacing:-.02em;}
 .burn__copy p{font-size:var(--fs-h3);font-weight:var(--fw-strong);}
 
 /* ---------- marquee ---------- */
