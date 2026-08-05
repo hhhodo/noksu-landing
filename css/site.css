@@ -60,10 +60,10 @@ body{background:var(--brand-cream);}
 
 /* ---------- badges ---------- */
 .badge-outline{display:inline-flex;align-items:center;height:40px;padding-inline:var(--space-4);
-  border:1px solid currentColor;border-radius:var(--radius-sm);
+  border:1px solid currentColor;border-radius:var(--radius-sm);white-space:nowrap;
   font-size:var(--fs-body-1);font-weight:var(--fw-strong);letter-spacing:.04em;text-transform:uppercase;}
 .badge-solid{display:inline-flex;align-items:center;height:48px;padding-inline:var(--space-5);
-  border-radius:var(--radius-circle);color:#fff;
+  border-radius:var(--radius-circle);color:#fff;white-space:nowrap;
   font-size:var(--fs-body-1);font-weight:var(--fw-strong);}
 .badge-solid--red{background:var(--brand-pink);}
 
