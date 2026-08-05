@@ -38,6 +38,10 @@ body{background:var(--brand-cream);}
 /* ---------- hero (photo area = placeholder gray per brief) ---------- */
 .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;}
 .hero__media{position:absolute;inset:0;z-index:0;}
+/* Bottom dim scrim so hero copy stays legible over the photo — cheatsheet's own rule
+   ("text over image always requires a dim overlay"), not a decorative add-on. */
+.hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(to bottom, transparent 40%, rgb(0 0 0 / .75) 100%);}
 .hero__content{position:relative;z-index:1;width:100%;height:100%;padding-block-end:var(--space-8);}
 .hero__panel{display:flex;align-items:flex-end;height:100%;}
 .hero__info{color:var(--text-default-inverse);max-width:26ch;}
