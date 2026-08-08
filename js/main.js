@@ -8,9 +8,18 @@
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
+  const navDrawer = document.getElementById('navDrawer');
   navToggle?.addEventListener('click', () => {
-    const isOpen = nav.classList.toggle('is-scrolled');
+    const isOpen = nav.classList.toggle('is-open');
     navToggle.setAttribute('aria-expanded', String(isOpen));
+    navToggle.textContent = isOpen ? '✕' : '≡';
+  });
+  navDrawer?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.textContent = '≡';
+    });
   });
 
   const revealEls = document.querySelectorAll('[data-reveal]');

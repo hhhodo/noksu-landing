@@ -33,7 +33,15 @@ body{background:var(--brand-cream);}
 .nav__mark{font-size:var(--fs-body-1);font-weight:var(--fw-strong);letter-spacing:.04em;
   text-transform:uppercase;color:var(--text-default-inverse);}
 .nav.is-scrolled .nav__mark{color:var(--brand-ink);}
-.nav__toggle{display:none;}
+.nav__toggle{display:none;background:transparent;font-size:var(--fs-h3);line-height:1;}
+/* Mobile drawer: always solid cream regardless of nav.is-scrolled, since it can be
+   opened while the hero photo is still showing behind a transparent nav bar — links
+   must stay readable (ink on cream) either way. */
+.nav__drawer{display:none;flex-direction:column;gap:var(--space-5);
+  padding:var(--space-5) var(--gutter) var(--space-6);
+  background:var(--brand-cream);border-top:var(--border-1);}
+.nav__drawer a{font-size:var(--fs-body-1);font-weight:var(--fw-strong);color:var(--brand-ink);}
+.nav.is-open .nav__drawer{display:flex;}
 
 /* ---------- hero (photo area = placeholder gray per brief) ---------- */
 .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;}
@@ -231,12 +239,20 @@ body{background:var(--brand-cream);}
     border-radius:var(--radius-circle);border:1px solid currentColor;background:transparent;cursor:pointer;}
   .hero__panel{flex-direction:column;align-items:flex-start;}
   .hero__arc{transform:scale(.7);transform-origin:bottom right;}
+  .flip-card{grid-column:1/13 !important;}
+  .crave .grid>div{grid-column:1/13 !important;}
+  .footer .grid>div{grid-column:1/13 !important;}
+  .footer .grid>div+div{margin-top:var(--space-7);}
+  .footer__info{grid-template-columns:repeat(2,1fr) !important;}
 }
 @media (max-width:1024px){
   .flavor-track{--card-w:86vw;}
 }
 @media (max-width:768px){
-  .flip-card{grid-column:1/13 !important;}
   .flavor-track{--card-w:92vw;}
   .hero__arc{transform:scale(.5);transform-origin:bottom right;}
+  .hero__info{max-width:20ch;}
+  .hero__info h2{white-space:normal;}
+  .footer__info{grid-template-columns:1fr !important;}
+  .footer__info dd{margin-bottom:var(--space-5);}
 }
