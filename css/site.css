@@ -250,9 +250,19 @@ body{background:var(--brand-cream);}
 }
 @media (max-width:768px){
   .flavor-track{--card-w:92vw;}
-  .hero__arc{transform:scale(.5);transform-origin:bottom right;}
   .hero__info{max-width:20ch;}
   .hero__info h2{white-space:normal;}
   .footer__info{grid-template-columns:1fr !important;}
   .footer__info dd{margin-bottom:var(--space-5);}
+
+  /* Mobile hero pagination: the big product-photo circles don't fit at this size —
+     switch to a plain horizontal dot row (standard pagination pattern) instead of just
+     scaling the same vertical bubble stack down. Bottle photo/per-flavor color are
+     dropped here since dots only need to communicate position + which one is active. */
+  .hero__arc{position:absolute;right:auto;left:50%;bottom:var(--space-6);z-index:1;
+    transform:translateX(-50%);flex-direction:row;align-items:center;gap:var(--space-3);}
+  .hero__bubble{width:8px;height:8px;border:none;background:rgb(255 255 255 / .45) !important;}
+  .hero__bubble .img{display:none;}
+  .hero__bubble:hover{transform:none;}
+  .hero__bubble.is-active{background:#fff !important;transform:scale(1.5);}
 }
