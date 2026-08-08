@@ -148,30 +148,55 @@
     nextBtn?.addEventListener('click', () => step(1));
   }
 
-  // ---------- hero pagination: clicking a small circle swaps the hero copy + tint ----------
+  // ---------- hero pagination: clicking a dot, or swiping the hero, swaps copy + photo ----------
+  const heroSection = document.querySelector('.hero');
   const heroInfo = document.getElementById('heroInfo');
   const heroAlc = document.getElementById('heroAlc');
   const heroName = document.getElementById('heroName');
   const heroDesc = document.getElementById('heroDesc');
   const heroMedia = document.getElementById('heroMedia');
-  const heroBubbles = document.querySelectorAll('.hero__bubble');
+  const heroBubbles = [...document.querySelectorAll('.hero__bubble')];
+
+  const activateBubble = (bubble) => {
+    if (!bubble || bubble.classList.contains('is-active')) return;
+    heroBubbles.forEach((b) => b.classList.remove('is-active'));
+    bubble.classList.add('is-active');
+
+    heroInfo.classList.add('is-swapping');
+    heroMedia.style.opacity = 0;
+    window.setTimeout(() => {
+      heroAlc.textContent = bubble.dataset.alc;
+      heroName.textContent = bubble.dataset.name;
+      heroDesc.textContent = bubble.dataset.desc;
+      if (bubble.dataset.media) heroMedia.style.backgroundImage = `url('${bubble.dataset.media}')`;
+      heroInfo.classList.remove('is-swapping');
+      heroMedia.style.opacity = 1;
+    }, 200);
+  };
 
   heroBubbles.forEach((bubble) => {
-    bubble.addEventListener('click', () => {
-      if (bubble.classList.contains('is-active')) return;
-      heroBubbles.forEach((b) => b.classList.remove('is-active'));
-      bubble.classList.add('is-active');
-
-      heroInfo.classList.add('is-swapping');
-      heroMedia.style.opacity = 0;
-      window.setTimeout(() => {
-        heroAlc.textContent = bubble.dataset.alc;
-        heroName.textContent = bubble.dataset.name;
-        heroDesc.textContent = bubble.dataset.desc;
-        if (bubble.dataset.media) heroMedia.style.backgroundImage = `url('${bubble.dataset.media}')`;
-        heroInfo.classList.remove('is-swapping');
-        heroMedia.style.opacity = 1;
-      }, 200);
-    });
+    bubble.addEventListener('click', () => activateBubble(bubble));
   });
+
+  // Swipe the hero photo itself to step through flavors — same activation path as
+  // clicking a dot, just driven by a touch gesture instead.
+  if (heroSection) {
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    heroSection.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    heroSection.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      const dy = e.changedTouches[0].clientY - touchStartY;
+      if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return; // too short, or a vertical scroll
+      const activeIndex = heroBubbles.findIndex((b) => b.classList.contains('is-active'));
+      const step = dx < 0 ? 1 : -1; // swipe left -> next, swipe right -> previous
+      const nextIndex = (activeIndex + step + heroBubbles.length) % heroBubbles.length;
+      activateBubble(heroBubbles[nextIndex]);
+    }, { passive: true });
+  }
 })();
