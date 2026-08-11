@@ -33,7 +33,20 @@ body{background:var(--brand-cream);}
 .nav__mark{font-size:var(--fs-body-1);font-weight:var(--fw-strong);letter-spacing:.04em;
   text-transform:uppercase;color:var(--text-default-inverse);}
 .nav.is-scrolled .nav__mark{color:var(--brand-ink);}
-.nav__toggle{display:none;background:transparent;font-size:var(--fs-h3);line-height:1;}
+.nav__toggle{display:none;background:transparent;}
+/* CSS-drawn bars instead of a text glyph ("≡") — glyph centering depends on the active
+   font's metrics/fallback and read visibly off-center inside the circular button. This
+   is exact regardless of font. */
+.nav__toggle-bars,.nav__toggle-bars::before,.nav__toggle-bars::after{
+  display:block;width:16px;height:2px;background:currentColor;border-radius:1px;}
+.nav__toggle-bars{position:relative;transition:background-color .15s ease;}
+.nav__toggle-bars::before,.nav__toggle-bars::after{content:"";position:absolute;left:0;
+  transition:transform .2s ease,top .2s ease;}
+.nav__toggle-bars::before{top:-5px;}
+.nav__toggle-bars::after{top:5px;}
+.nav.is-open .nav__toggle-bars{background:transparent;}
+.nav.is-open .nav__toggle-bars::before{top:0;transform:rotate(45deg);}
+.nav.is-open .nav__toggle-bars::after{top:0;transform:rotate(-45deg);}
 /* Mobile drawer: always solid cream regardless of nav.is-scrolled, since it can be
    opened while the hero photo is still showing behind a transparent nav bar — links
    must stay readable (ink on cream) either way. */
@@ -104,10 +117,10 @@ body{background:var(--brand-cream);}
    spans the actual viewport edge to edge. Side padding is exactly half of --card-w, so
    at scrollLeft:0 the first card is centered with precisely half of its neighbor
    showing on both left and right — no post-load scroll needed. */
-.flavor-track{--card-w:min(880px, 76vw);
+.flavor-track{--card-w:min(880px, 76vw);--pop:130px;
   display:flex;gap:var(--grid-gutter-lg);overflow-x:auto;overflow-y:hidden;
   scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;
-  padding-block:calc(var(--space-9) + 130px) calc(var(--space-9) + 50px);
+  padding-block:calc(var(--space-9) + var(--pop)) calc(var(--space-9) + 50px);
   padding-inline:calc(var(--card-w) / 2);}
 .flavor-track::-webkit-scrollbar{display:none;}
 .flavor-card{position:relative;overflow:visible;
@@ -122,7 +135,7 @@ body{background:var(--brand-cream);}
 .flavor-card[data-reveal].is-visible{opacity:.2;transform:scale(.82);}
 .flavor-card.is-active[data-reveal].is-visible{opacity:1;transform:scale(1) translateY(calc(-1 * var(--space-2)));}
 .flavor-card__bg{position:absolute;inset:0;z-index:1;border-radius:var(--radius-lg);overflow:hidden;}
-.flavor-card__media{position:absolute;z-index:2;left:calc(50% + 50px);top:calc(-1 * var(--space-7) - 130px);
+.flavor-card__media{position:absolute;z-index:2;left:calc(50% + 50px);top:calc(-1 * var(--space-7) - var(--pop));
   transform:translateX(-50%) rotate(8deg);width:80%;height:calc(100% + var(--space-11));border-radius:var(--radius-sm);
   background-color:transparent;
   filter:drop-shadow(0 40px 50px color-mix(in srgb, var(--card-color, #000) 10%, transparent));}
@@ -218,8 +231,8 @@ body{background:var(--brand-cream);}
 
 /* ---------- footer ---------- */
 .footer{padding-block:var(--space-9);background:#fff;}
-.footer__mark{width:64px;height:64px;border-radius:var(--radius-circle);border:var(--border-1);
-  display:flex;align-items:center;justify-content:center;font-weight:var(--fw-strong);margin-bottom:var(--space-6);}
+.footer__mark{font-size:var(--fs-h3);font-weight:var(--fw-strong);letter-spacing:.04em;
+  text-transform:uppercase;margin-bottom:var(--space-6);}
 .footer__social{display:flex;gap:var(--space-3);margin-top:var(--space-6);}
 .footer__social a{width:44px;height:44px;border-radius:var(--radius-circle);border:var(--border-1);
   display:flex;align-items:center;justify-content:center;}
@@ -249,7 +262,8 @@ body{background:var(--brand-cream);}
   .flavor-track{--card-w:86vw;}
 }
 @media (max-width:768px){
-  .flavor-track{--card-w:92vw;}
+  .flavor-track{--card-w:92vw;--pop:40px;}
+  .section-head{margin-bottom:var(--space-5);}
   .hero__info{max-width:20ch;}
   .hero__info h2{white-space:normal;}
   .footer__info{grid-template-columns:1fr !important;}

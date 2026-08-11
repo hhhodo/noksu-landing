@@ -12,13 +12,11 @@
   navToggle?.addEventListener('click', () => {
     const isOpen = nav.classList.toggle('is-open');
     navToggle.setAttribute('aria-expanded', String(isOpen));
-    navToggle.textContent = isOpen ? '✕' : '≡';
   });
   navDrawer?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
       nav.classList.remove('is-open');
       navToggle.setAttribute('aria-expanded', 'false');
-      navToggle.textContent = '≡';
     });
   });
 
