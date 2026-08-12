@@ -26,11 +26,18 @@ body{background:var(--brand-cream);}
 .nav{position:fixed;inset-inline:0;top:0;z-index:50;padding-block:var(--space-5);
   transition:background-color .25s ease;}
 .nav.is-scrolled{background:var(--brand-cream);border-bottom:var(--border-1);}
-.nav__bar{display:flex;align-items:center;justify-content:space-between;gap:var(--space-5);}
+/* position:relative + an absolutely-centered mark, rather than flex space-between —
+   space-between only centers the middle item when both side groups are equal width,
+   and the left group (브랜드/메뉴, 2 links) is wider than the right (즐기는 법, 1 link),
+   so the NOKSU mark was visibly off-center toward the wider side. Centering it via
+   left:50%/translateX(-50%) makes it exact regardless of how the side content differs. */
+.nav__bar{display:flex;align-items:center;position:relative;gap:var(--space-5);}
 .nav__links{display:flex;align-items:center;gap:var(--space-7);font-size:var(--fs-body-1);font-weight:var(--fw-strong);}
 .nav__links,.nav__toggle{color:var(--text-default-inverse);}
 .nav.is-scrolled .nav__links,.nav.is-scrolled .nav__toggle{color:var(--brand-ink);}
-.nav__mark{font-size:var(--fs-body-1);font-weight:var(--fw-strong);letter-spacing:.04em;
+.nav__links:last-of-type,.nav__toggle{margin-left:auto;}
+.nav__mark{position:absolute;left:50%;top:50%;transform:translate(-50%, -50%);
+  font-size:var(--fs-body-1);font-weight:var(--fw-strong);letter-spacing:.04em;
   text-transform:uppercase;color:var(--text-default-inverse);}
 .nav.is-scrolled .nav__mark{color:var(--brand-ink);}
 .nav__toggle{display:none;background:transparent;}
@@ -230,16 +237,17 @@ body{background:var(--brand-cream);}
 @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
 /* ---------- footer ---------- */
-.footer{padding-block:var(--space-9);background:#fff;}
-.footer__mark{font-size:var(--fs-h3);font-weight:var(--fw-strong);letter-spacing:.04em;
+.footer{padding-block:var(--space-9);background:#fff;font-size:var(--fs-body-2);}
+.footer__mark{font-size:var(--fs-body-1);font-weight:var(--fw-strong);letter-spacing:.04em;
   text-transform:uppercase;margin-bottom:var(--space-6);}
+.footer a{font-size:var(--fs-body-2);}
 .footer__social{display:flex;gap:var(--space-3);margin-top:var(--space-6);}
 .footer__social a{width:44px;height:44px;border-radius:var(--radius-circle);border:var(--border-1);
   display:flex;align-items:center;justify-content:center;}
-.footer__info dt{font-size:var(--fs-body-2);font-weight:var(--fw-strong);color:var(--text-subtle);margin-bottom:var(--space-2);}
-.footer__info dd{margin-bottom:var(--space-6);}
+.footer__info dt{font-size:var(--fs-badge);font-weight:var(--fw-strong);color:var(--text-subtle);margin-bottom:var(--space-2);}
+.footer__info dd{font-size:var(--fs-body-2);margin-bottom:var(--space-6);}
 .footer__legal{color:var(--text-subtle);border-top:var(--border-1);margin-top:var(--space-7);padding-top:var(--space-6);}
-.footer__legal p{margin-bottom:var(--space-2);font-size:var(--fs-body-2);}
+.footer__legal p{margin-bottom:var(--space-2);font-size:var(--fs-badge);}
 
 /* ---------- reveal ---------- */
 [data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
