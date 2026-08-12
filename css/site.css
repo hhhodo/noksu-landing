@@ -270,8 +270,15 @@ body{background:var(--brand-cream);}
   .flavor-track{--card-w:86vw;}
 }
 @media (max-width:768px){
-  .flavor-track{--card-w:92vw;--pop:40px;}
+  .flavor-track{--card-w:92vw;--pop:40px;
+    padding-block-start:calc(var(--space-4) + var(--pop));}
   .section-head{margin-bottom:var(--space-5);}
+  /* The two FIND YOUR FLAVOR sections had different title-to-card gaps on mobile: the
+     flavor-track carries extra top padding for the product-image pop-out (reduced above
+     via --pop), but the pairing-card grid right below the second heading had none, so
+     the two sections read as inconsistently spaced. Give the second grid the same extra
+     amount so both sections' gap matches exactly. */
+  #blog .grid{margin-top:calc(var(--space-4) + var(--pop, 40px));}
   .hero__info{max-width:20ch;}
   .hero__info h2{white-space:normal;}
   .footer__info{grid-template-columns:1fr !important;}
